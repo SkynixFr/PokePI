@@ -1,5 +1,6 @@
 //Setup du serveur Express
-const express = require("express")
+import express from 'express'
+import { Send } from 'express-serve-static-core'
 const cors = require("cors")
 const swaggerJsDoc = require("swagger-jsdoc")
 const swaggerUI = require("swagger-ui-express")
@@ -25,6 +26,11 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 
+//Setup Interface 
+export interface TypedResponse<ResBody> extends Express.Response {
+   json: Send<ResBody, this>
+}
+
 //Analyse du cors, du type de contenu
 app.use(cors(corsOptions))
 app.use(express.json())
@@ -32,11 +38,11 @@ app.use(express.urlencoded({ extended: true }))
 
 //Route par défaut
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs))
-app.get("/", (req, res) => {
+app.get("/", (req: Express.Request, res: TypedResponse<{message: String}>) => {
    res.json({
-      message: "Hello !"
+      message: "Hello world!"
    })
 })
 app.listen(port, () => {
-   console.log(`Le serveur tourne sur le port ${port}`)
+   console.log(`Le serveur tourne sur http://localhost:${port}`)
 })
