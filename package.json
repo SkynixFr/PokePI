@@ -1,41 +1,43 @@
 {
-   "name": "pokepi",
-   "version": "1.0.0",
-   "description": "L'API Pokepi permet à l'utilisateur de frabiquer son propre pokédex de pokémons",
-   "main": "server.ts",
-   "scripts": {
-      "build": "npx tsc",
-      "start": "node dist/server.js",
-      "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
-   },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/SkynixFr/PokePI.git"
-   },
-   "keywords": [
-      "API",
-      "Pokémon",
-      "Pokémon",
-      "Pokédex"
-   ],
-   "author": "SkynixFr, Luffysonic",
-   "license": "ISC",
-   "bugs": {
-      "url": "https://github.com/SkynixFr/PokePI/issues"
-   },
-   "homepage": "https://github.com/SkynixFr/PokePI#readme",
-   "dependencies": {
-      "cors": "^2.8.5",
-      "express": "^4.18.2",
-      "mysql": "^2.18.1",
-      "swagger-jsdoc": "^6.2.7",
-      "swagger-ui-express": "^4.6.0"
-   },
-   "devDependencies": {
-      "@types/express": "^4.17.15",
-      "@types/node": "^18.11.18",
-      "concurrently": "^7.6.0",
-      "nodemon": "^2.0.20",
-      "typescript": "^4.9.4"
-   }
+	"name": "pokepi",
+	"version": "1.0.0",
+	"description": "L'API Pokepi permet à l'utilisateur de frabiquer son propre pokédex de pokémons",
+	"main": "server.ts",
+	"scripts": {
+		"build": "npx tsc",
+		"start": "node dist/server.js",
+		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
+		"prettier": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SkynixFr/PokePI.git"
+	},
+	"keywords": [
+		"API",
+		"Pokémon",
+		"Pokémon",
+		"Pokédex"
+	],
+	"author": "SkynixFr, Luffysonic",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/SkynixFr/PokePI/issues"
+	},
+	"homepage": "https://github.com/SkynixFr/PokePI#readme",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.18.2",
+		"mysql": "^2.18.1",
+		"swagger-jsdoc": "^6.2.7",
+		"swagger-ui-express": "^4.6.0"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.15",
+		"@types/node": "^18.11.18",
+		"concurrently": "^7.6.0",
+		"nodemon": "^2.0.20",
+		"prettier": "^2.8.1",
+		"typescript": "^4.9.4"
+	}
 }

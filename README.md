@@ -6,9 +6,10 @@ API qui permet à l'utilisateur de fabriquer son propre pokédex de pokémons
 
 Ne pas oublier de créer un fichier db.config.ts dans le dossier /config. Il faut mettre le code du fichier exemple.config.ts et rentrer vos propre valeur.
 
-## Script d'installation de la base de donnée 
+## Script d'installation de la base de donnée
 
 Table Client
+
 ```
 CREATE TABLE `client` (
   `idClient` int NOT NULL AUTO_INCREMENT,
@@ -19,6 +20,7 @@ CREATE TABLE `client` (
 ```
 
 Table Pokédex
+
 ```
 CREATE TABLE `pokédex` (
   `Clientid` int NOT NULL,
