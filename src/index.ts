@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import express, { Router, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import sequelize from './db/sequelize';
 
 //Récupération des données dans le fichier .env
 dotenv.config();
@@ -24,6 +25,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 try {
+	sequelize;
 	app.listen(PORT, () => {
 		console.log(`Server is running on http://localhost:${PORT}`);
 	});
