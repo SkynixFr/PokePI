@@ -2,22 +2,22 @@ import Pokemon, {
 	BasePokemon,
 	CompletePokemon
 } from '../models/pokemon.interface';
-import * as PokemonService from '../services/pokemon.service';
+import * as pokemonService from '../services/pokemon.service';
 
 //création Pokémon
 export const create = async (data: Pokemon): Promise<CompletePokemon> => {
-	return PokemonService.create(data);
+	return pokemonService.create(data);
 };
 
 //GetAll pokemon
 export const getAll = async (): Promise<Pokemon[]> => {
-	return PokemonService.getAll();
+	return pokemonService.getAll();
 };
 
 //Get Pokemon by name
-export const getByName = async (NamePokemon: string): Promise<Pokemon> => {
+export const getByName = async (nom: string): Promise<Pokemon> => {
 	try {
-		return PokemonService.getByName(NamePokemon);
+		return pokemonService.getByName(nom);
 	} catch (e) {
 		throw e as Error;
 	}
@@ -29,7 +29,7 @@ export const update = async (
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	try {
-		return PokemonService.update(idPokemon, data);
+		return pokemonService.update(idPokemon, data);
 	} catch (error) {
 		throw error;
 	}
@@ -37,7 +37,7 @@ export const update = async (
 
 export const deleteById = async (idPokemon: number): Promise<boolean> => {
 	try {
-		return PokemonService.deleteById(idPokemon);
+		return pokemonService.deleteById(idPokemon);
 	} catch (error) {
 		throw error;
 	}

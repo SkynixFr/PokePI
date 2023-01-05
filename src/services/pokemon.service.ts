@@ -15,9 +15,9 @@ export const getAll = async (): Promise<Pokemon[]> => {
 };
 
 //Get Pokemon by Name
-export const getByName = async (NamePokemon: string): Promise<Pokemon> => {
+export const getByName = async (nom: string): Promise<Pokemon> => {
 	try {
-		return repository.getByName(NamePokemon);
+		return repository.getByName(nom);
 	} catch (e) {
 		throw e as Error;
 	}

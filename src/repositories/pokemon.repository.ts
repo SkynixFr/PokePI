@@ -14,9 +14,9 @@ export const getAll = async (): Promise<Pokemon[]> => {
 	return await Pokemon.findAll();
 };
 
-export const getByName = async (NamePokemon: string): Promise<Pokemon> => {
+export const getByName = async (nom: string): Promise<Pokemon> => {
 	const pokemon = await Pokemon.findOne({
-		where: { Nom_Pokemon: NamePokemon }
+		where: { nom_Pokemon: nom }
 	});
 	if (!pokemon) {
 		throw new Error('Pokemon Not Found');
@@ -38,9 +38,9 @@ export const update = async (
 	return updatedPokemon;
 };
 
-export const deleteById = async (idPokemon: number): Promise<boolean> => {
+export const deleteById = async (id: number): Promise<boolean> => {
 	const deletedPokemon = await Pokemon.destroy({
-		where: { idPokemon }
+		where: { idPokemon: id }
 	});
 
 	return !!deletedPokemon;

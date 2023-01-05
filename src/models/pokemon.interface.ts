@@ -4,28 +4,28 @@ import sequelize from '../db/sequelize';
 //Interface Pokemon
 
 export interface BasePokemon {
-	Nom_Pokemon: string;
-	Type1: string;
-	Type2: string;
-	Generation: number;
-	Normal: number;
-	Combat: number;
-	Vol: number;
-	Poison: number;
-	Sol: number;
-	Roche: number;
-	Insecte: number;
-	Spectre: number;
-	Acier: number;
-	Feu: number;
-	Eau: number;
-	Plante: number;
-	Electrik: number;
-	Psy: number;
-	Glace: number;
-	Dragon: number;
-	Tenebre: number;
-	Fee: number;
+	nom_Pokemon: string;
+	type1: string;
+	type2: string;
+	generation: number;
+	normal: number;
+	combat: number;
+	vol: number;
+	poison: number;
+	sol: number;
+	roche: number;
+	insecte: number;
+	spectre: number;
+	acier: number;
+	feu: number;
+	eau: number;
+	plante: number;
+	electrik: number;
+	psy: number;
+	glace: number;
+	dragon: number;
+	tenebre: number;
+	fee: number;
 }
 
 //interface Complete Pokemon
@@ -36,28 +36,28 @@ export interface CompletePokemon extends BasePokemon {
 //classe utilisé pour pokémon
 class Pokemon extends Model<CompletePokemon> implements BasePokemon {
 	public idPokemon!: number;
-	public Nom_Pokemon!: string;
-	public Type1!: string;
-	public Type2: string = '';
-	public Generation!: number;
-	public Normal!: number;
-	public Combat!: number;
-	public Vol!: number;
-	public Poison!: number;
-	public Sol!: number;
-	public Roche!: number;
-	public Insecte!: number;
-	public Spectre!: number;
-	public Acier!: number;
-	public Feu!: number;
-	public Eau!: number;
-	public Plante!: number;
-	public Electrik!: number;
-	public Psy!: number;
-	public Glace!: number;
-	public Dragon!: number;
-	public Tenebre!: number;
-	public Fee!: number;
+	public nom_Pokemon!: string;
+	public type1!: string;
+	public type2: string = '';
+	public generation!: number;
+	public normal!: number;
+	public combat!: number;
+	public vol!: number;
+	public poison!: number;
+	public sol!: number;
+	public roche!: number;
+	public insecte!: number;
+	public spectre!: number;
+	public acier!: number;
+	public feu!: number;
+	public eau!: number;
+	public plante!: number;
+	public electrik!: number;
+	public psy!: number;
+	public glace!: number;
+	public dragon!: number;
+	public tenebre!: number;
+	public fee!: number;
 }
 
 //initialisation pokemon pour la BD
@@ -68,91 +68,91 @@ Pokemon.init(
 			autoIncrement: true,
 			primaryKey: true
 		},
-		Nom_Pokemon: {
+		nom_Pokemon: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		Type1: {
+		type1: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		Type2: {
+		type2: {
 			type: DataTypes.STRING,
 			allowNull: true
 		},
-		Generation: {
+		generation: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Normal: {
+		normal: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Combat: {
+		combat: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Vol: {
+		vol: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Poison: {
+		poison: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Sol: {
+		sol: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Roche: {
+		roche: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Insecte: {
+		insecte: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Spectre: {
+		spectre: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Acier: {
+		acier: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Feu: {
+		feu: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Eau: {
+		eau: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Plante: {
+		plante: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Electrik: {
+		electrik: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Psy: {
+		psy: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Glace: {
+		glace: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Dragon: {
+		dragon: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Tenebre: {
+		tenebre: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		Fee: {
+		fee: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		}
