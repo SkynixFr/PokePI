@@ -1,3 +1,4 @@
+import { truncate } from 'fs';
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../db/sequelize';
 
@@ -32,11 +33,7 @@ Client.init(
 		},
 		mdpClient: {
 			type: DataTypes.STRING,
-			allowNull: false,
-			validate: {
-				is: '^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$',
-				len: [8, 20]
-			}
+			allowNull: false
 		}
 	},
 	{
