@@ -4,7 +4,7 @@ import sequelize from '../db/sequelize';
 //Interface Pokemon
 
 export interface BasePokemon {
-	nom_Pokemon: string;
+	nomPokemon: string;
 	type1: string;
 	type2: string;
 	generation: number;
@@ -36,9 +36,9 @@ export interface CompletePokemon extends BasePokemon {
 //classe utilisé pour pokémon
 class Pokemon extends Model<CompletePokemon> implements BasePokemon {
 	public idPokemon!: number;
-	public nom_Pokemon!: string;
+	public nomPokemon!: string;
 	public type1!: string;
-	public type2: string = '';
+	public type2!: string;
 	public generation!: number;
 	public normal!: number;
 	public combat!: number;
@@ -68,7 +68,7 @@ Pokemon.init(
 			autoIncrement: true,
 			primaryKey: true
 		},
-		nom_Pokemon: {
+		nomPokemon: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
@@ -77,8 +77,7 @@ Pokemon.init(
 			allowNull: false
 		},
 		type2: {
-			type: DataTypes.STRING,
-			allowNull: true
+			type: DataTypes.STRING
 		},
 		generation: {
 			type: DataTypes.INTEGER,

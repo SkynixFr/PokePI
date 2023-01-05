@@ -26,9 +26,21 @@ pokemonRouter.get('/', async (req: Request, res: Response) => {
 });
 
 pokemonRouter.get('/:name', async (req: Request, res: Response) => {
-	const NomPokemon = String(req.params.name);
+	const nomPokemon = String(req.params.name);
 	try {
-		const result = await pokemonController.getByName(NomPokemon);
+		const result = await pokemonController.getByName(nomPokemon);
+		return res.status(200).send(result);
+	} catch (error) {
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
+	}
+});
+
+pokemonRouter.get('/type/:type', async (req: Request, res: Response) => {
+	const typePokemon = String(req.params.type);
+
+	try {
+		const result = await pokemonController.getByType(typePokemon);
 		return res.status(200).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'unknown error';

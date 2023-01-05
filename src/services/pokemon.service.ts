@@ -23,6 +23,15 @@ export const getByName = async (nom: string): Promise<Pokemon> => {
 	}
 };
 
+//get Pokemon by Type
+export const getByType = async (type: string): Promise<Pokemon[]> => {
+	try {
+		return repository.getByType(type);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
 //update a Pokemon
 export const update = async (
 	nom: string,
