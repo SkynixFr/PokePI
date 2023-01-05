@@ -31,7 +31,6 @@ export const getByName = async (nom: string): Promise<Pokemon> => {
 
 //avoir une liste de pokémon en fonction d'un type
 export const getByType = async (type: string): Promise<Pokemon[]> => {
-	console.log(type);
 	const pokemons = await Pokemon.findAll({
 		//avec attributes on va récupérer que les nons des pokémons que l'on veut
 		//comme un select nomPokemon from ...
