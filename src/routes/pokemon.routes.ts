@@ -10,7 +10,8 @@ pokemonRouter.post('/', async (req: Request, res: Response) => {
 		const result = await pokemonController.create(pokemonToSave);
 		return res.status(201).send(result);
 	} catch (error) {
-		return res.status(400).send('Bad request: ' + error);
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(400).send(message);
 	}
 });
 
@@ -19,7 +20,8 @@ pokemonRouter.get('/', async (req: Request, res: Response) => {
 		const results = await pokemonController.getAll();
 		return res.status(200).send(results);
 	} catch (error) {
-		return res.status(400).send('Bad request: ' + error);
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
 	}
 });
 
@@ -29,7 +31,8 @@ pokemonRouter.get('/:name', async (req: Request, res: Response) => {
 		const result = await pokemonController.getByName(NomPokemon);
 		return res.status(200).send(result);
 	} catch (error) {
-		return res.status(404).send('Bad request: ' + error);
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
 	}
 });
 
@@ -43,17 +46,19 @@ pokemonRouter.put('/:name', async (req: Request, res: Response) => {
 		);
 		return res.status(200).send(result);
 	} catch (error) {
-		return res.status(404).send('Bad request: ' + error);
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
 	}
 });
 
 pokemonRouter.delete('/:name', async (req: Request, res: Response) => {
-	const nomPokemon = String(req.params.name);
 	try {
-		const result = pokemonController.deleteByName(nomPokemon);
+		const nomPokemon = String(req.params.name);
+		const result = await pokemonController.deleteByName(nomPokemon);
 		return res.status(204).send({ success: result });
 	} catch (error) {
-		return res.status(404).send(error);
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
 	}
 });
 

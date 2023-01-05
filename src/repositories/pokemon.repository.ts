@@ -1,3 +1,4 @@
+import { exit } from 'process';
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
@@ -43,8 +44,10 @@ export const update = async (
 
 export const deleteByName = async (nom: string): Promise<boolean> => {
 	const deletedPokemon = await Pokemon.destroy({
-		where: { nom_Pokemon: nom }
+		where: { nom_Pokemon : nom}
 	});
-
+	if (!deletedPokemon) {
+		throw new Error('Not found');
+	}
 	return !!deletedPokemon;
 };
