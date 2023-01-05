@@ -25,19 +25,19 @@ export const getByName = async (nom: string): Promise<Pokemon> => {
 
 //update a Pokemon
 export const update = async (
-	idPokemon: number,
+	nom: string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	try {
-		return pokemonService.update(idPokemon, data);
+		return pokemonService.update(nom, data);
 	} catch (error) {
 		throw error;
 	}
 };
 
-export const deleteById = async (idPokemon: number): Promise<boolean> => {
+export const deleteByName = async (nom: string): Promise<boolean> => {
 	try {
-		return pokemonService.deleteById(idPokemon);
+		return pokemonService.deleteByName(nom);
 	} catch (error) {
 		throw error;
 	}

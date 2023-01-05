@@ -25,12 +25,12 @@ export const getByName = async (nom: string): Promise<Pokemon> => {
 
 //update a Pokemon
 export const update = async (
-	idPokemon: number,
+	nom: string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
-	return repository.update(idPokemon, data);
+	return repository.update(nom, data);
 };
 
-export const deleteById = async (idPokemon: number): Promise<boolean> => {
-	return repository.deleteById(idPokemon);
+export const deleteByName = async (nom: string): Promise<boolean> => {
+	return repository.deleteByName(nom);
 };

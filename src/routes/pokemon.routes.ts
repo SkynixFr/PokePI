@@ -24,30 +24,33 @@ pokemonRouter.get('/', async (req: Request, res: Response) => {
 });
 
 pokemonRouter.get('/:name', async (req: Request, res: Response) => {
-	const NamePokemon = String(req.params.name);
+	const NomPokemon = String(req.params.name);
 	try {
-		const result = await pokemonController.getByName(NamePokemon);
+		const result = await pokemonController.getByName(NomPokemon);
 		return res.status(200).send(result);
 	} catch (error) {
 		return res.status(404).send('Bad request: ' + error);
 	}
 });
 
-pokemonRouter.put('/:id', async (req: Request, res: Response) => {
-	const idPokemon = Number(req.params.id);
+pokemonRouter.put('/:name', async (req: Request, res: Response) => {
+	const nomPokemon = String(req.params.name);
 	const PokemonToUpdate: Pokemon = req.body;
 	try {
-		const result = await pokemonController.update(idPokemon, PokemonToUpdate);
+		const result = await pokemonController.update(
+			nomPokemon,
+			PokemonToUpdate
+		);
 		return res.status(200).send(result);
 	} catch (error) {
 		return res.status(404).send('Bad request: ' + error);
 	}
 });
 
-pokemonRouter.delete('/:id', async (req: Request, res: Response) => {
-	const idPokemon = Number(req.params.id);
+pokemonRouter.delete('/:name', async (req: Request, res: Response) => {
+	const nomPokemon = String(req.params.name);
 	try {
-		const result = pokemonController.deleteById(idPokemon);
+		const result = pokemonController.deleteByName(nomPokemon);
 		return res.status(204).send({ success: result });
 	} catch (error) {
 		return res.status(404).send(error);
