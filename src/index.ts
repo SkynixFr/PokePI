@@ -7,6 +7,7 @@ import sequelize from './db/sequelize';
 //Récupération des données dans le fichier .env
 dotenv.config();
 if (!process.env.PORT) {
+	console.error('Missing PORT');
 	process.exit(1);
 }
 const PORT: number = parseInt(process.env.PORT);
