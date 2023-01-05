@@ -21,13 +21,4 @@ const sequelize = new Sequelize(DB_NAME, USER, PASSWORD, {
 	dialect: 'mysql'
 });
 
-sequelize
-	.authenticate()
-	.then(() => {
-		console.log('Connection successfull!');
-	})
-	.catch(error => {
-		console.error('Unable to connect to database: ' + error);
-	});
-
 export default sequelize;

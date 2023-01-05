@@ -1,8 +1,9 @@
 import * as dotenv from 'dotenv';
-import express, { Router, Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import sequelize from './db/sequelize';
+import routes from './routes/index';
+import dbInit from './db/init';
 
 //Récupération des données dans le fichier .env
 dotenv.config();
@@ -17,16 +18,10 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-
-//Initial route
-app.get('/', (req: Request, res: Response) => {
-	res.json({
-		message: 'Pokepi !'
-	});
-});
+app.use('/api/v1', routes);
 
 try {
-	sequelize;
+	dbInit();
 	app.listen(PORT, () => {
 		console.log(`Server is running on http://localhost:${PORT}`);
 	});
