@@ -20,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/v1', routes);
 
+//Lancement de la connexion à la base de données et du serveur
 try {
 	dbInit();
 	app.listen(PORT, () => {

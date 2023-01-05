@@ -41,7 +41,6 @@ clientsRouter.post(
 			clientData.mdpClient = await bcrypt.hash(clientData.mdpClient, 10);
 
 			const result = await clientController.create(clientData);
-
 			return res.status(201).send(result);
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
@@ -49,17 +48,6 @@ clientsRouter.post(
 		}
 	}
 );
-
-clientsRouter.get('/:id', async (req: Request, res: Response) => {
-	try {
-		const id = Number(req.params.id);
-		const result = await clientController.getById(id);
-		return res.status(200).send(result);
-	} catch (error) {
-		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(404).send(message);
-	}
-});
 
 clientsRouter.delete('/:id', async (req: Request, res: Response) => {
 	try {

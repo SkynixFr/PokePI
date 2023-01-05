@@ -6,17 +6,6 @@ export const create = async (data: Client): Promise<CompleteClient> => {
 	return client;
 };
 
-//Récupération de l'utilisateur par son id dans la base de données
-export const getById = async (id: number): Promise<Client> => {
-	const client = await Client.findByPk(id);
-
-	if (!client) {
-		throw new Error('Not found');
-	}
-
-	return client;
-};
-
 //Récupération de l'utilisateur par son mail dans la base de données
 export const getByMail = async (mail: string): Promise<Client> => {
 	const client = await Client.findOne({
