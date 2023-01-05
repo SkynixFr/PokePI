@@ -1,43 +1,47 @@
-import Pokemon, { BasePokemon, CompletePokemon } from "../models/pokemon.interface"
+import Pokemon, {
+	BasePokemon,
+	CompletePokemon
+} from '../models/pokemon.interface';
 
 //création d'un pokémon dans la BD
-export const create = async (data: Pokemon): Promise<CompletePokemon> =>{
-    const pokemon = await Pokemon.create(data)
-    return pokemon;
-}
+export const create = async (data: Pokemon): Promise<CompletePokemon> => {
+	const pokemon = await Pokemon.create(data);
+	return pokemon;
+};
 
 //Avoir tous les pokémons
-export const getAll = async () : Promise<Pokemon[]> =>{
-    return await Pokemon.findAll();
-}
+export const getAll = async (): Promise<Pokemon[]> => {
+	return await Pokemon.findAll();
+};
 
+export const getByName = async (NamePokemon: string): Promise<Pokemon> => {
+	const pokemon = await Pokemon.findOne({
+		where: { Nom_Pokemon: NamePokemon }
+	});
+	if (!pokemon) {
+		throw new Error('Pokemon Not Found');
+	}
+	return pokemon;
+};
 
+export const update = async (
+	idPokemon: number,
+	data: BasePokemon
+): Promise<Pokemon> => {
+	const pokemon = await Pokemon.findByPk(idPokemon);
 
-export const getByName = async (NamePokemon:string):Promise<Pokemon> => {
-    const pokemon = await Pokemon.findOne({
-        where : {Nom_Pokemon : NamePokemon}
-    })
-    if(!pokemon){
-        throw new Error("Pokemon Not Found")
-    }
-    return pokemon;
-}
+	if (!pokemon) {
+		throw new Error('Pokemon Not Found');
+	}
+	const updatedPokemon = await (pokemon as Pokemon).update(data);
 
-export const update = async (idPokemon:number,data :BasePokemon) : Promise<Pokemon> =>{
-    const pokemon = await Pokemon.findByPk(idPokemon)
+	return updatedPokemon;
+};
 
-    if(!pokemon){
-        throw new Error("Pokemon Not Found")
-    }
-    const updatedPokemon = await (pokemon as Pokemon).update(data)
+export const deleteById = async (idPokemon: number): Promise<boolean> => {
+	const deletedPokemon = await Pokemon.destroy({
+		where: { idPokemon }
+	});
 
-    return updatedPokemon
-}
-
-export const deleteById =async (idPokemon:number) : Promise<boolean> => {
-    const deletedPokemon = await Pokemon.destroy({
-        where : {idPokemon}
-    })
-
-    return !!deletedPokemon
-}
+	return !!deletedPokemon;
+};
