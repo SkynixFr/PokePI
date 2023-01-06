@@ -47,9 +47,45 @@ export const getByType = async (type: string): Promise<Pokemon[]> => {
 	return pokemons;
 };
 
-//updates les infos d'un pokémon précis
+//avoir une liste de pokémon en fonction d'un type
+export const getBy2Type = async (
+	type1: string,
+	type2: string
+): Promise<Pokemon[]> => {
+	const pokemons = await Pokemon.findAll({
+		//avec attributes on va récupérer que les nons des pokémons que l'on veut
+		//comme un select nomPokemon from ...
+		attributes: ['nomPokemon'],
+		where: {
+			//Op.and pour avoir l'opérande and = et en fr
+			[Op.and]: [{ type1: type1 }, { type2: type2 }]
+		}
+	});
+
+	if (!pokemons) {
+		throw new Error('pokemons Not Found');
+	}
+	return pokemons;
+};
+
+//avoir une liste des types du pokémon en fonction du pokémon
+export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
+	const pokemon = await Pokemon.findOne({
+		attributes: ['type1','type2'],
+		where: { nomPokemon: nom }
+	});
+	if (!pokemon) {
+		throw new Error('pokemon Not Found');
+	}
+	return pokemon;
+};
+
+
+
+//updates les infos d'un pokémon précis avec son nom
 export const update = async (
 	nom: string,
+	nomchange:string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	const pokemon = await Pokemon.findOne({
@@ -57,6 +93,9 @@ export const update = async (
 	});
 	if (!pokemon) {
 		throw new Error('pokemon Not Found');
+	}
+	if(nomchange==pokemon.nomPokemon){
+		throw new Error('Le nom du pokémon à changé est le même en entrée');		
 	}
 	const updatedPokemon = await (pokemon as Pokemon).update(data);
 

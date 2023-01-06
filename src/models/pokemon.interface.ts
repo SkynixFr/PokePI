@@ -81,79 +81,154 @@ Pokemon.init(
 		},
 		generation: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 1
+			}
 		},
 		normal: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		combat: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		vol: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		poison: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		sol: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		roche: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		insecte: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		spectre: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		acier: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		feu: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		eau: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		plante: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		electrik: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		psy: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		glace: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		dragon: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		tenebre: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		},
 		fee: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				min: 0,
+				max: 4
+			}
 		}
 	},
 	{ timestamps: true, sequelize: sequelize }

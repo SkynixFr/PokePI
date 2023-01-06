@@ -32,13 +32,37 @@ export const getByType = async (type: string): Promise<Pokemon[]> => {
 	}
 };
 
+//get Pokemons by 2Types
+
+export const getBy2Type = async (
+	type1: string,
+	type2: string
+): Promise<Pokemon[]> => {
+	try {
+		return pokemonService.getBy2Type(type1, type2);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
+//Get Pokemon by name
+export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
+	try {
+		return pokemonService.getByNameTypes(nom);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
+
 //update a Pokemon
 export const update = async (
 	nom: string,
+	nomchange:string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	try {
-		return pokemonService.update(nom, data);
+		return pokemonService.update(nom,nomchange, data);
 	} catch (error) {
 		throw error;
 	}

@@ -1,3 +1,4 @@
+import { type } from 'os';
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
@@ -32,14 +33,50 @@ export const getByType = async (type: string): Promise<Pokemon[]> => {
 	}
 };
 
+//get Pokemons by 2 types
+export const getBy2Type = async (
+	type1: string,
+	type2: string
+): Promise<Pokemon[]> => {
+	try {
+		return repository.getBy2Type(type1, type2);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
+//get les types du pokémon en paramètre
+export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
+	try {
+		return repository.getByNameTypes(nom);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
+
+
 //update a Pokemon
 export const update = async (
 	nom: string,
+	nomchange:string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
-	return repository.update(nom, data);
+	return repository.update(nom,nomchange, data);
 };
 
 export const deleteByName = async (nom: string): Promise<boolean> => {
 	return repository.deleteByName(nom);
+};
+
+//Vérification si le nom d'un pokémon existe déjà en base de données
+export const checkPokemonExist = async (
+	nompokemon: string
+): Promise<Boolean> => {
+	try {
+		await repository.getByName(nompokemon);
+		return true;
+	} catch (error) {
+		return false;
+	}
 };
