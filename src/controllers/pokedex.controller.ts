@@ -1,12 +1,12 @@
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
-} from '../models/pokedex.interface';
-import * as pokemonService from '../services/pokedex.service';
+} from '../models/pokemon.interface';
+import * as pokedexService from '../services/pokedex.service';
 
 //création Pokémon
 export const create = async (data: Pokemon): Promise<CompletePokemon> => {
-	return pokemonService.create(data);
+	return pokedexService.create(data);
 };
 
 ////////////////////////////////////////////////////////
@@ -15,13 +15,13 @@ export const create = async (data: Pokemon): Promise<CompletePokemon> => {
 
 //GetAll pokemon
 export const getAll = async (): Promise<Pokemon[]> => {
-	return pokemonService.getAll();
+	return pokedexService.getAll();
 };
 
 //Get Pokemon by name
 export const getByName = async (nom: string): Promise<Pokemon> => {
 	try {
-		return pokemonService.getByName(nom);
+		return pokedexService.getByName(nom);
 	} catch (e) {
 		throw e as Error;
 	}
@@ -30,7 +30,7 @@ export const getByName = async (nom: string): Promise<Pokemon> => {
 //get Pokemon by Type
 export const getByType = async (type: string): Promise<Pokemon[]> => {
 	try {
-		return pokemonService.getByType(type);
+		return pokedexService.getByType(type);
 	} catch (e) {
 		throw e as Error;
 	}
@@ -43,7 +43,7 @@ export const getBy2Type = async (
 	type2: string
 ): Promise<Pokemon[]> => {
 	try {
-		return pokemonService.getBy2Type(type1, type2);
+		return pokedexService.getBy2Type(type1, type2);
 	} catch (e) {
 		throw e as Error;
 	}
@@ -52,7 +52,7 @@ export const getBy2Type = async (
 //Get Pokemon by name
 export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 	try {
-		return pokemonService.getByNameTypes(nom);
+		return pokedexService.getByNameTypes(nom);
 	} catch (e) {
 		throw e as Error;
 	}
@@ -60,10 +60,26 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 
 //GetAll pokemon d'une génération
 export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
-	return pokemonService.getAllGeneration(gen);
+	return pokedexService.getAllGeneration(gen);
 };
 
+//get Pokemon by Resistance
+export const getByResistance = async (resistance: string): Promise<Pokemon[]> => {
+	try {
+		return pokedexService.getByResistance(resistance);
+	} catch (e) {
+		throw e as Error;
+	}
+};
 
+//get Pokemon by Resistance
+export const getBy2Resistance = async (resistance1: string,resistance2:string): Promise<Pokemon[]> => {
+	try {
+		return pokedexService.getBy2Resistance(resistance1,resistance2);
+	} catch (e) {
+		throw e as Error;
+	}
+};
 
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
@@ -76,7 +92,7 @@ export const update = async (
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	try {
-		return pokemonService.update(nom, nomchange, data);
+		return pokedexService.update(nom, nomchange, data);
 	} catch (error) {
 		throw error;
 	}
@@ -84,7 +100,7 @@ export const update = async (
 
 export const deleteByName = async (nom: string): Promise<boolean> => {
 	try {
-		return pokemonService.deleteByName(nom);
+		return pokedexService.deleteByName(nom);
 	} catch (error) {
 		throw error;
 	}

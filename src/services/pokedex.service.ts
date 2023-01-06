@@ -2,7 +2,7 @@ import { type } from 'os';
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
-} from '../models/pokedex.interface';
+} from '../models/pokemon.interface';
 import * as repository from '../repositories/pokedex.repository';
 
 //création Pokémon
@@ -61,6 +61,26 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 //Get tous les pokémon d'une génération
 export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
 	return repository.getAllGeneration(gen);
+};
+
+
+
+//get Pokemon by resistance
+export const getByResistance = async (resistance: string): Promise<Pokemon[]> => {
+	try {
+		return repository.getByResistance(resistance);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
+//get Pokemon by 2 resistance
+export const getBy2Resistance = async (resistance1: string,resistance2:string): Promise<Pokemon[]> => {
+	try {
+		return repository.getBy2Resistance(resistance1,resistance2);
+	} catch (e) {
+		throw e as Error;
+	}
 };
 
 ////////////////////////////////////////////////////////
