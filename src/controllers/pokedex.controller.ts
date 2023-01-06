@@ -59,12 +59,14 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 };
 
 //GetAll pokemon d'une génération
-export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
+export const getAllGeneration = async (gen: number): Promise<Pokemon[]> => {
 	return pokedexService.getAllGeneration(gen);
 };
 
 //get Pokemon by Resistance
-export const getByResistance = async (resistance: string): Promise<Pokemon[]> => {
+export const getByResistance = async (
+	resistance: string
+): Promise<Pokemon[]> => {
 	try {
 		return pokedexService.getByResistance(resistance);
 	} catch (e) {
@@ -73,9 +75,21 @@ export const getByResistance = async (resistance: string): Promise<Pokemon[]> =>
 };
 
 //get Pokemon by Resistance
-export const getBy2Resistance = async (resistance1: string,resistance2:string): Promise<Pokemon[]> => {
+export const getBy2Resistance = async (
+	resistance1: string,
+	resistance2: string
+): Promise<Pokemon[]> => {
 	try {
-		return pokedexService.getBy2Resistance(resistance1,resistance2);
+		return pokedexService.getBy2Resistance(resistance1, resistance2);
+	} catch (e) {
+		throw e as Error;
+	}
+};
+
+//get Résistance du pokémon
+export const getByNameResistance = async (nom: string): Promise<Pokemon> => {
+	try {
+		return pokedexService.getByNameResistance(nom);
 	} catch (e) {
 		throw e as Error;
 	}
