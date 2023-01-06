@@ -54,15 +54,14 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 	}
 };
 
-
 //update a Pokemon
 export const update = async (
 	nom: string,
-	nomchange:string,
+	nomchange: string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	try {
-		return pokemonService.update(nom,nomchange, data);
+		return pokemonService.update(nom, nomchange, data);
 	} catch (error) {
 		throw error;
 	}

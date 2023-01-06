@@ -71,7 +71,7 @@ export const getBy2Type = async (
 //avoir une liste des types du pokémon en fonction du pokémon
 export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 	const pokemon = await Pokemon.findOne({
-		attributes: ['type1','type2'],
+		attributes: ['type1', 'type2'],
 		where: { nomPokemon: nom }
 	});
 	if (!pokemon) {
@@ -80,12 +80,10 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 	return pokemon;
 };
 
-
-
 //updates les infos d'un pokémon précis avec son nom
 export const update = async (
 	nom: string,
-	nomchange:string,
+	nomchange: string,
 	data: BasePokemon
 ): Promise<Pokemon> => {
 	const pokemon = await Pokemon.findOne({
@@ -94,8 +92,8 @@ export const update = async (
 	if (!pokemon) {
 		throw new Error('pokemon Not Found');
 	}
-	if(nomchange==pokemon.nomPokemon){
-		throw new Error('Le nom du pokémon à changé est le même en entrée');		
+	if (nomchange == pokemon.nomPokemon) {
+		throw new Error('Le nom du pokémon à changé est le même en entrée');
 	}
 	const updatedPokemon = await (pokemon as Pokemon).update(data);
 
