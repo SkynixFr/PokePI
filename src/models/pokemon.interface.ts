@@ -58,6 +58,11 @@ class Pokemon extends Model<CompletePokemon> implements BasePokemon {
 	public dragon!: number;
 	public tenebre!: number;
 	public fee!: number;
+
+	// constructor(pokemonPayload: any) {
+	// 	super();
+
+	// }
 }
 
 //initialisation pokemon pour la BD
@@ -74,86 +79,87 @@ Pokemon.init(
 		},
 		type1: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		},
 		type2: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: true
 		},
 		generation: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		normal: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		combat: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		vol: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		poison: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		sol: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		roche: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		insecte: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		spectre: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		acier: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		feu: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		eau: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		plante: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		electrik: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		psy: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		glace: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		dragon: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		tenebre: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		fee: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		}
 	},
 	{ timestamps: true, sequelize: sequelize }
