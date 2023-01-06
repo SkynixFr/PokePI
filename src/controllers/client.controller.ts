@@ -14,3 +14,12 @@ export const deleteById = async (id: number): Promise<boolean> => {
 		throw error;
 	}
 };
+
+//Appel de la fonciton de récupération des données d'un client par son mail
+export const getByMail = async (mail: string): Promise<Client> => {
+	try {
+		return service.getByMail(mail);
+	} catch (error) {
+		throw error;
+	}
+};

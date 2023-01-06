@@ -11,6 +11,11 @@ export const deleteById = async (id: number): Promise<boolean> => {
 	return repository.deleteById(id);
 };
 
+//Récupération des données d'un client par son mail
+export const getByMail = async (mail: string): Promise<Client> => {
+	return repository.getByMail(mail);
+};
+
 //Vérification si le mail d'un utilisateur existe déjà en base de données
 export const checkMailExist = async (mail: string): Promise<Boolean> => {
 	try {
