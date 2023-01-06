@@ -1,7 +1,7 @@
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
-} from '../models/pokedex.interface';
+} from '../models/pokemon.interface';
 import { Op } from 'sequelize';
 
 //création d'un pokémon dans la BD
@@ -95,6 +95,48 @@ export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
 };
 
 
+//avoir une liste de pokémon qui ont une résistance donné en entrée 
+export const getByResistance = async (resistance: string): Promise<Pokemon[]> => {
+	const pokemons = await Pokemon.findAll({
+		//avec attributes on va récupérer que les nons des pokémons que l'on veut
+		//comme un select nomPokemon from ...
+		attributes: ['nomPokemon'],
+		where: {
+			//Op.or pour avoir l'opérande OR = ou en fr
+			//on fait [resistance] pour avoir la valeur du string de resistance et donc chercher 
+			//sur la valeur du string par ex "spectre" et chercher ainsi sur la colonne de la BD du nom "spectre"
+			//[resistance] : {$eq :0.5},
+			[Op.or]: [{[resistance] : {$eq :0.5}}, {[resistance] : {$eq :0.25}}]
+		}
+	});
+	if (!pokemons) {
+		throw new Error('pokemons Not Found');
+	}
+	return pokemons;
+};
+
+//avoir une liste de pokémon qui ont une résistance donné en entrée 
+export const getBy2Resistance = async (resistance1: string,resistance2:string): Promise<Pokemon[]> => {
+	const pokemons = await Pokemon.findAll({
+		//avec attributes on va récupérer que les nons des pokémons que l'on veut
+		//comme un select nomPokemon from ...
+		attributes: ['nomPokemon'],
+		where: {
+			//Op.or pour avoir l'opérande OR = ou en fr
+			//on fait [resistance] pour avoir la valeur du string de resistance et donc chercher 
+			//sur la valeur du string par ex "spectre" et chercher ainsi sur la colonne de la BD du nom "spectre"
+			//[resistance] : {$eq :0.5},
+			[Op.and]:[
+				{[Op.or]: [{[resistance1] : {$eq :0.5}}, {[resistance1] : {$eq :0.25}}]},
+				{[Op.or]: [{[resistance2] : {$eq :0.5}}, {[resistance2] : {$eq :0.25}}]}				
+			]
+		}
+	});
+	if (!pokemons) {
+		throw new Error('pokemons Not Found');
+	}
+	return pokemons;
+};
 
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
