@@ -1,7 +1,7 @@
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
-} from '../models/pokemon.interface';
+} from '../models/pokedex.interface';
 import { Op } from 'sequelize';
 
 //création d'un pokémon dans la BD

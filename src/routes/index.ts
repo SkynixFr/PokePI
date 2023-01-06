@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import clientsRouter from './clients.routes';
-import PokemonRouter from './pokemon.routes';
+import PokemonRouter from './pokedex.routes';
 import VerifyToken from '../middlewares/authToken';
 //Configuration des routes clients et pokemon
 const router = Router();

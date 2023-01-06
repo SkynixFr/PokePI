@@ -1,8 +1,8 @@
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
-} from '../models/pokemon.interface';
-import * as pokemonService from '../services/pokemon.service';
+} from '../models/pokedex.interface';
+import * as pokemonService from '../services/pokedex.service';
 
 //création Pokémon
 export const create = async (data: Pokemon): Promise<CompletePokemon> => {

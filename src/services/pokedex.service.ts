@@ -2,8 +2,8 @@ import { type } from 'os';
 import Pokemon, {
 	BasePokemon,
 	CompletePokemon
-} from '../models/pokemon.interface';
-import * as repository from '../repositories/pokemon.repository';
+} from '../models/pokedex.interface';
+import * as repository from '../repositories/pokedex.repository';
 
 //création Pokémon
 export const create = async (data: Pokemon): Promise<CompletePokemon> => {

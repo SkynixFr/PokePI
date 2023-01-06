@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
-import Pokemon from '../models/pokemon.interface';
-import * as pokemonController from '../controllers/pokemon.controller';
-import * as pokemonService from '../services/pokemon.service';
+import Pokemon from '../models/pokedex.interface';
+import * as pokemonController from '../controllers/pokedex.controller';
+import * as pokemonService from '../services/pokedex.service';
 
 const pokemonRouter = Router();
 
