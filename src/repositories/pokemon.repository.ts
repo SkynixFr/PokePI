@@ -13,6 +13,11 @@ export const create = async (data: Pokemon): Promise<CompletePokemon> => {
 	return pokemon;
 };
 
+
+////////////////////////////////////////////////////////
+////////////////////////Tous les Get////////////////////
+////////////////////////////////////////////////////////
+
 //Avoir tous les pokémons
 export const getAll = async (): Promise<Pokemon[]> => {
 	return await Pokemon.findAll();
@@ -79,6 +84,32 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 	}
 	return pokemon;
 };
+
+
+//Avoir tous les pokémons d'une génération
+export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
+	return await Pokemon.findAll({
+		attributes: ['nomPokemon'],
+		where: { generation: gen}
+	});
+};
+
+
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
 
 //updates les infos d'un pokémon précis avec son nom
 export const update = async (

@@ -9,6 +9,10 @@ export const create = async (data: Pokemon): Promise<CompletePokemon> => {
 	return pokemonService.create(data);
 };
 
+////////////////////////////////////////////////////////
+////////////////////////Tous les Get////////////////////
+////////////////////////////////////////////////////////
+
 //GetAll pokemon
 export const getAll = async (): Promise<Pokemon[]> => {
 	return pokemonService.getAll();
@@ -53,6 +57,17 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 		throw e as Error;
 	}
 };
+
+//GetAll pokemon d'une génération
+export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
+	return pokemonService.getAllGeneration(gen);
+};
+
+
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 
 //update a Pokemon
 export const update = async (

@@ -10,6 +10,10 @@ export const create = async (data: Pokemon): Promise<CompletePokemon> => {
 	return repository.create(data);
 };
 
+////////////////////////////////////////////////////////
+////////////////////////Tous les Get////////////////////
+////////////////////////////////////////////////////////
+
 //GetAll pokemon
 export const getAll = async (): Promise<Pokemon[]> => {
 	return repository.getAll();
@@ -53,6 +57,15 @@ export const getByNameTypes = async (nom: string): Promise<Pokemon> => {
 		throw e as Error;
 	}
 };
+
+//Get tous les pokémon d'une génération
+export const getAllGeneration = async (gen:number): Promise<Pokemon[]> => {
+	return repository.getAllGeneration(gen);
+};
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 
 //update a Pokemon
 export const update = async (

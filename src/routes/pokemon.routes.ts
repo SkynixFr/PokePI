@@ -30,6 +30,10 @@ pokemonRouter.post('/', async (req: Request, res: Response) => {
 	}
 });
 
+////////////////////////////////////////////////////////
+////////////////////////Tous les Get////////////////////
+////////////////////////////////////////////////////////
+
 pokemonRouter.get('/', async (req: Request, res: Response) => {
 	try {
 		const results = await pokemonController.getAll();
@@ -90,6 +94,38 @@ pokemonRouter.get(
 	}
 );
 
+
+
+//avoir les types d'un pokémon
+pokemonRouter.get('/:name/types', async (req: Request, res: Response) => {
+	//Il faut vérifier que le nom soit valide avec l'api
+	const nomPokemon = String(req.params.name);
+	try {
+		const result = await pokemonController.getByNameTypes(nomPokemon);
+		return res.status(200).send(result);
+	} catch (error) {
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
+	}
+});
+
+
+pokemonRouter.get('/generation/:generation', async (req: Request, res: Response) => {
+	try {
+		const generationPokemon = Number(req.params.generation)
+		const results = await pokemonController.getAllGeneration(generationPokemon);
+		return res.status(200).send(results);
+	} catch (error) {
+		let message = error instanceof Error ? error.message : 'unknown error';
+		return res.status(404).send(message);
+	}
+});
+
+
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 pokemonRouter.put('/:name/:namechange', async (req: Request, res: Response) => {
 	const nomPokemon = String(req.params.name);
 	const nomPokemonChange = String(req.params.namechange);
@@ -100,19 +136,6 @@ pokemonRouter.put('/:name/:namechange', async (req: Request, res: Response) => {
 			nomPokemonChange,
 			PokemonToUpdate
 		);
-		return res.status(200).send(result);
-	} catch (error) {
-		let message = error instanceof Error ? error.message : 'unknown error';
-		return res.status(404).send(message);
-	}
-});
-
-//avoir les types d'un pokémon
-pokemonRouter.get('/:name/types', async (req: Request, res: Response) => {
-	//Il faut vérifier que le nom soit valide avec l'api
-	const nomPokemon = String(req.params.name);
-	try {
-		const result = await pokemonController.getByNameTypes(nomPokemon);
 		return res.status(200).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'unknown error';
