@@ -91,8 +91,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 		const token = jwt.sign(clientData, process.env.SECRET_TOKEN, {
 			expiresIn: '5m'
 		});
-		console.log(token);
-		res.header('auth-token', token).send({
+		res.header('x-access-token', token).send({
 			message: 'Success'
 		});
 	} catch (error) {
