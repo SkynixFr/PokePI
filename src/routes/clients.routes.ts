@@ -92,6 +92,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 			expiresIn: '1h'
 		});
 		res.header('x-access-token', token).send({
+			token: token,
 			message: 'Success'
 		});
 	} catch (error) {
@@ -100,15 +101,15 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 	}
 });
 
-clientsRouter.delete('/:id', async (req: Request, res: Response) => {
-	try {
-		const id = Number(req.params.id);
-		const result = await clientController.deleteById(id);
-		return res.status(204).send({ success: result });
-	} catch (error) {
-		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(404).send(message);
-	}
-});
+// clientsRouter.delete('/:id', async (req: Request, res: Response) => {
+// 	try {
+// 		const id = Number(req.params.id);
+// 		const result = await clientController.deleteById(id);
+// 		return res.status(204).send({ success: result });
+// 	} catch (error) {
+// 		let message = error instanceof Error ? error.message : 'Unknown error';
+// 		return res.status(404).send(message);
+// 	}
+// });
 
 export default clientsRouter;

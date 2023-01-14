@@ -2,8 +2,6 @@ import Client, { CompleteClient } from '../models/client.interface';
 
 //Création de l'utisateur dans la base de données
 export const create = async (data: Client): Promise<CompleteClient> => {
-	console.log(data);
-
 	const client = await Client.create(data);
 	return client;
 };
