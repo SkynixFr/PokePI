@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../db/sequelize';
+import Pokedex from './pokedex.interface';
 
 //Interface d'un client
 export interface BaseClient {
@@ -44,5 +45,8 @@ Client.init(
 		sequelize: sequelize
 	}
 );
+
+//Ajout un lien 1-1 client-pokedex
+Client.hasOne(Pokedex, { foreignKey: 'idClient' });
 
 export default Client;
