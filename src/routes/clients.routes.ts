@@ -89,7 +89,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 
 		//Créé et assigne un token à l'utilisateur
 		const token = jwt.sign(clientData, process.env.SECRET_TOKEN, {
-			expiresIn: '5m'
+			expiresIn: '1h'
 		});
 		res.header('x-access-token', token).send({
 			message: 'Success'
