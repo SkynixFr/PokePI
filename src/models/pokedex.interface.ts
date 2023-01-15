@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../db/sequelize';
 import Pokemon from './pokemon.interface';
-import Client from './client.interface';
 
 //Interface d'un pokédex
 export interface CompletePokedex {

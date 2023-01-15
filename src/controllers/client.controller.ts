@@ -7,9 +7,9 @@ export const create = async (data: Client): Promise<CompleteClient> => {
 };
 
 //Appel de la fonction de suppression d'un utilisateur par son id
-export const deleteById = async (id: number): Promise<boolean> => {
+export const deleteByMail = async (mail: string): Promise<boolean> => {
 	try {
-		return service.deleteById(id);
+		return service.deleteByMail(mail);
 	} catch (error) {
 		throw error;
 	}

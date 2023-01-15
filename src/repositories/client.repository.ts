@@ -21,9 +21,9 @@ export const getByMail = async (mail: string): Promise<Client> => {
 };
 
 //Suppression de l'utilisateur par son id dans la base de données
-export const deleteById = async (id: number): Promise<boolean> => {
+export const deleteByMail = async (mail: string): Promise<boolean> => {
 	const deletedClient = await Client.destroy({
-		where: { idClient: id }
+		where: { mailClient: mail }
 	});
 
 	if (!deletedClient) {

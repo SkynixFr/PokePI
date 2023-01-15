@@ -7,8 +7,8 @@ export const create = async (data: Client): Promise<CompleteClient> => {
 };
 
 //Suppression de l'utilisateur par son id dans la base de données
-export const deleteById = async (id: number): Promise<boolean> => {
-	return repository.deleteById(id);
+export const deleteByMail = async (mail: string): Promise<boolean> => {
+	return repository.deleteByMail(mail);
 };
 
 //Récupération des données d'un client par son mail
