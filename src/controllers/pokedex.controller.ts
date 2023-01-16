@@ -1,18 +1,7 @@
-import Pokedex, { CompletePokedex } from '../models/pokedex.interface';
+import Pokedex from '../models/pokedex.interface';
 import * as service from '../services/pokedex.service';
 
-//Création d'un pokedex
-export const create = async (data: Pokedex): Promise<CompletePokedex> => {
+//Création d'un pokédex d'un client
+export const create = async (data: any): Promise<any> => {
 	return service.create(data);
-};
-
-//Récupération d'un pokedex d'un client
-export const getByMailClient = async (
-	mail: string
-): Promise<CompletePokedex> => {
-	try {
-		return service.getByMailClient(mail);
-	} catch (error) {
-		throw error;
-	}
 };

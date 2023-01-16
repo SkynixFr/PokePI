@@ -36,7 +36,4 @@ Client.init(
 	}
 );
 
-//Ajout un lien 1-1 client-pokedex
-Client.hasOne(Pokedex, { foreignKey: 'mailClient' });
-
 export default Client;
