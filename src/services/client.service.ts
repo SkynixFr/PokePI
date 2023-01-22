@@ -25,3 +25,13 @@ export const checkMailExist = async (mail: string): Promise<Boolean> => {
 		return false;
 	}
 };
+
+//Récupération de tous les pokémons d'un pokédex d'un client
+export const getPokemonsInPokedex = async (mail: string): Promise<Client> => {
+	return repository.getPokemonsInPokedex(mail);
+};
+
+//Récupération d'un pokémon d'un pokédex d'un client
+export const getPokemonInPokedex = async (data: any): Promise<Client> => {
+	return repository.getPokemonInPokedex(data);
+};

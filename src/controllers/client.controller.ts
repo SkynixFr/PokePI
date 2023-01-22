@@ -23,3 +23,21 @@ export const getByMail = async (mail: string): Promise<Client> => {
 		throw error;
 	}
 };
+
+//Récupération de tous les pokémons d'un pokédex d'un client
+export const getPokemonsInPokedex = async (mail: string): Promise<Client> => {
+	try {
+		return service.getPokemonsInPokedex(mail);
+	} catch (error) {
+		throw error;
+	}
+};
+
+//Récupération d'un pokémon d'un pokédex d'un client
+export const getPokemonInPokedex = async (data: any): Promise<Client> => {
+	try {
+		return service.getPokemonInPokedex(data);
+	} catch (error) {
+		throw error;
+	}
+};

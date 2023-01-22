@@ -7,10 +7,18 @@ export const create = async (data: any): Promise<any> => {
 
 //Récupération d'un pokémon d'un pokédex d'un client
 export const getByPokemon = async (data: any): Promise<any> => {
-	return service.getByPokemon(data);
+	try {
+		return service.getByPokemon(data);
+	} catch (error) {
+		throw error;
+	}
 };
 
 //Suppression d'un enregistrement de pokémon d'un pokédex d'un client
 export const deleteByPokemon = async (data: any): Promise<boolean> => {
-	return service.deleteByPokemon(data);
+	try {
+		return service.deleteByPokemon(data);
+	} catch (error) {
+		throw error;
+	}
 };

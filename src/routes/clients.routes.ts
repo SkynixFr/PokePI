@@ -1,14 +1,16 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import Client from '../models/client.interface';
 import * as clientController from '../controllers/client.controller';
-import * as clientRepository from '../repositories/client.repository';
 import * as clientService from '../services/client.service';
+import * as pokedexService from '../services/pokedex.service';
+import VerifyToken from '../middlewares/authToken';
+import Cache from '../middlewares/cache';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const clientsRouter = Router();
 
-//Création de l'utilisateur
+//Création du client
 clientsRouter.post('/register', async (req: Request, res: Response) => {
 	try {
 		const clientData: Client = req.body;
@@ -47,6 +49,7 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 	}
 });
 
+//Connexion du client
 clientsRouter.post('/login', async (req: Request, res: Response) => {
 	try {
 		const clientData: Client = req.body;
@@ -101,15 +104,90 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 	}
 });
 
-// clientsRouter.delete('/:id', async (req: Request, res: Response) => {
-// 	try {
-// 		const id = Number(req.params.id);
-// 		const result = await clientController.deleteById(id);
-// 		return res.status(204).send({ success: result });
-// 	} catch (error) {
-// 		let message = error instanceof Error ? error.message : 'Unknown error';
-// 		return res.status(404).send(message);
-// 	}
-// });
+//Récupération de tous les pokémons d'un pokédex d'un client
+clientsRouter.get(
+	'/pokedex/pokemons',
+	VerifyToken,
+	Cache,
+	async (req: Request, res: Response) => {
+		try {
+			const result = await clientController.getPokemonsInPokedex(
+				req.body.mailClient
+			);
+			return res.status(201).send(result);
+		} catch (error) {
+			let message = error instanceof Error ? error.message : 'Unknown error';
+			return res.status(400).send(message);
+		}
+	}
+);
+
+//Récupération d'un pokémon d'un pokédex d'un client
+clientsRouter.get(
+	'/pokedex/pokemon/:name',
+	VerifyToken,
+	Cache,
+	async (req: Request, res: Response) => {
+		try {
+			const clientData: any = {
+				mailClient: req.body.mailClient,
+				nomPokemon: req.params.name
+			};
+
+			//Test si les données ne sont pas manquantes
+			if (!clientData.mailClient || !clientData.nomPokemon) {
+				throw new Error('Something missing');
+			}
+
+			//Test si l'utilisateur existe
+			const clientExist = await clientService.checkMailExist(
+				clientData.mailClient
+			);
+
+			if (!clientExist) {
+				return res.status(400).send('User not found');
+			}
+
+			//Test si le pokédex existe
+			const pokedexExist = await pokedexService.checkPokemoninPokedexExist(
+				clientData
+			);
+			if (!pokedexExist) {
+				return res.status(400).send('Pokedex not found');
+			}
+
+			const result = await clientController.getPokemonInPokedex(clientData);
+			return res.status(201).send(result);
+		} catch (error) {
+			let message = error instanceof Error ? error.message : 'Unknown error';
+			return res.status(400).send(message);
+		}
+	}
+);
+
+//Suppression d'un client
+clientsRouter.delete('/', VerifyToken, async (req: Request, res: Response) => {
+	try {
+		//Test si les données ne sont pas manquantes
+		if (!req.body.mailClient) {
+			throw new Error('Something missing');
+		}
+
+		//Test si l'utilisateur existe
+		const clientExist = await clientService.checkMailExist(
+			req.body.mailClient
+		);
+
+		if (!clientExist) {
+			return res.status(400).send('User not found');
+		}
+
+		const result = await clientController.deleteByMail(req.body.mailClient);
+		return res.status(201).send(result);
+	} catch (error) {
+		let message = error instanceof Error ? error.message : 'Unknown error';
+		return res.status(400).send(message);
+	}
+});
 
 export default clientsRouter;
