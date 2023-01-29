@@ -1,4 +1,4 @@
-import Client, { CompleteClient } from '../models/client.interface';
+import Client, { CompleteClient, BaseClient } from '../models/client.interface';
 import * as repository from '../repositories/client.repository';
 
 //Appel de la fonction de création d'un utilisateur
@@ -34,4 +34,12 @@ export const getPokemonsInPokedex = async (mail: string): Promise<Client> => {
 //Récupération d'un pokémon d'un pokédex d'un client
 export const getPokemonInPokedex = async (data: any): Promise<Client> => {
 	return repository.getPokemonInPokedex(data);
+};
+
+//Modification d'un client
+export const update = async (
+	mailClient: string,
+	data: any
+): Promise<Client> => {
+	return repository.update(mailClient, data);
 };

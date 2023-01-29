@@ -16,7 +16,11 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 		const clientData: Client = req.body;
 
 		//Test si les données ne sont pas manquantes
-		if (!clientData.mailClient || !clientData.mdpClient) {
+		if (
+			!clientData.mailClient ||
+			!clientData.mdpClient ||
+			!clientData.username
+		) {
 			throw new Error('Something missing');
 		}
 
@@ -183,6 +187,32 @@ clientsRouter.delete('/', VerifyToken, async (req: Request, res: Response) => {
 		}
 
 		const result = await clientController.deleteByMail(req.body.mailClient);
+		return res.status(201).send(result);
+	} catch (error) {
+		let message = error instanceof Error ? error.message : 'Unknown error';
+		return res.status(400).send(message);
+	}
+});
+
+//Modification d'un client
+clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
+	const mailClient = req.body.mailClient;
+	const clientToUpdate = req.body.username;
+
+	try {
+		//Test si les données ne sont pas manquantes
+		if (!mailClient || !clientToUpdate) {
+			throw new Error('Something missing');
+		}
+
+		//Test si l'utilisateur existe
+		const clientExist = await clientService.checkMailExist(mailClient);
+
+		if (!clientExist) {
+			return res.status(400).send('Client not found');
+		}
+
+		const result = await clientController.update(mailClient, clientToUpdate);
 		return res.status(201).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';

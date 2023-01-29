@@ -1,4 +1,4 @@
-import Client, { CompleteClient } from '../models/client.interface';
+import Client, { CompleteClient, BaseClient } from '../models/client.interface';
 import * as service from '../services/client.service';
 
 //Appel de la fonction de création d'un utilisateur
@@ -37,6 +37,18 @@ export const getPokemonsInPokedex = async (mail: string): Promise<Client> => {
 export const getPokemonInPokedex = async (data: any): Promise<Client> => {
 	try {
 		return service.getPokemonInPokedex(data);
+	} catch (error) {
+		throw error;
+	}
+};
+
+//Modification d'un client
+export const update = async (
+	mailClient: string,
+	data: any
+): Promise<Client> => {
+	try {
+		return service.update(mailClient, data);
 	} catch (error) {
 		throw error;
 	}

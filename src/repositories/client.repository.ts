@@ -1,6 +1,5 @@
-import Client, { CompleteClient } from '../models/client.interface';
+import Client, { CompleteClient, BaseClient } from '../models/client.interface';
 import Pokemon from '../models/pokemon.interface';
-const bcrypt = require('bcrypt');
 
 //Création de l'utisateur dans la base de données
 export const create = async (data: Client): Promise<CompleteClient> => {
@@ -64,6 +63,25 @@ export const getPokemonInPokedex = async (data: any): Promise<Client> => {
 	if (!client) {
 		throw new Error('Client not found');
 	}
+
+	return client;
+};
+
+//Modification d'un client
+export const update = async (
+	mailClient: string,
+	data: any
+): Promise<Client> => {
+	const client = await Client.findByPk(mailClient);
+
+	console.log(client);
+
+	if (!client) {
+		throw new Error('Client not found');
+	}
+
+	client.username = data;
+	client.save();
 
 	return client;
 };
