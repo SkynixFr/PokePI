@@ -29,7 +29,7 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 		);
 
 		if (clientExist) {
-			return res.status(404).send('User already exist');
+			return res.status(404).send('Mail already exist');
 		}
 
 		//Test si le pseudo de l'utilisateur existe
@@ -106,7 +106,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 		const token = jwt.sign(clientData, process.env.SECRET_TOKEN, {
 			expiresIn: '1h'
 		});
-		res.header('x-access-token', token).send({
+		res.header('x-access-token', token).status(201).send({
 			token: token,
 			message: 'Success'
 		});

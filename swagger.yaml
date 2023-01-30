@@ -15,7 +15,52 @@ paths:
             201:
                description: La création du client s'est bien exécutée
             404:
-               description: Le client existe déjà
+               description: Le mail existe déjà | Le pseudo existe déjà
+            500:
+               description: Erreur interne du serveur
+   /client/login:
+      post:
+         tags:
+            - Client
+         summary: Connexion d'un compte client
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     type: object
+                     example:
+                        mailClient: 'cocoloco@gmail.com'
+                        mdpClient: 'Cocoloco-33'
+         responses:
+            201:
+               description: La connexion du client s'est bien exécutée
+            404:
+               description: Le client n'existe pas | Mauvaise données envoyées
+            500:
+               description: Erreur interne du serveur
+   /client/pokedex/pokemons:
+      get:
+         tags:
+            - Client
+         summary: Récupération de tous les pokémons d'un pokédex d'un client
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: La récupération s'est bien exécutée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le client n'existe pas | Mauvaise données envoyées
             500:
                description: Erreur interne du serveur
 definitions:
@@ -41,3 +86,15 @@ definitions:
          username: 'Cocoloco'
          mailClient: 'cocoloco@gmail.com'
          mdpClient: 'Cocoloco-33'
+components:
+   ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-access-token
+   responses:
+      UnauthorizedError:
+         description: La clé d'API est invalide ou manquante
+         headers:
+            x-access-token:
+               schema:
+                  type: string
