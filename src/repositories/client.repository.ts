@@ -85,3 +85,17 @@ export const update = async (
 
 	return client;
 };
+
+//Récupération de l'utilisateur par son pseudo dans la base de données
+export const getByUsername = async (username: string): Promise<Client> => {
+	const client = await Client.findOne({
+		where: {
+			username: username
+		}
+	});
+	if (!client) {
+		throw new Error('Not found');
+	}
+
+	return client;
+};

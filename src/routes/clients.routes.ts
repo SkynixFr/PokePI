@@ -32,6 +32,15 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 			return res.status(404).send('User already exist');
 		}
 
+		//Test si le pseudo de l'utilisateur existe
+		const clientUsernameExist = await clientService.checkUsernameExist(
+			clientData.username
+		);
+
+		if (clientUsernameExist) {
+			return res.status(404).send('Username already exist');
+		}
+
 		//Test si le mot de passe suit un bon pattern (1 majuscule, 1 minuscule, 1 caractère spécial, 8 caractères minimum)
 		const mdpRegex = new RegExp(
 			'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$'

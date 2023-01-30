@@ -26,6 +26,18 @@ export const checkMailExist = async (mail: string): Promise<Boolean> => {
 	}
 };
 
+//Vérification si le pseudo d'un utilisateur existe déjà en base de données
+export const checkUsernameExist = async (
+	username: string
+): Promise<Boolean> => {
+	try {
+		await repository.getByUsername(username);
+		return true;
+	} catch (error) {
+		return false;
+	}
+};
+
 //Récupération de tous les pokémons d'un pokédex d'un client
 export const getPokemonsInPokedex = async (mail: string): Promise<Client> => {
 	return repository.getPokemonsInPokedex(mail);

@@ -24,14 +24,19 @@ definitions:
       properties:
          username:
             type: string
+            description: Pseudo d'un client
          mailClient:
             type: string
+            description: Mail d'un client
          mdpClient:
             type: string
+            description: Mot de passe d'un client
          createdAt:
             type: date
+            description: Date de création du compte d'un client
          updatedAt:
             type: date
+            description: Date de modification du compte d'un client
       example:
          username: 'Cocoloco'
          mailClient: 'cocoloco@gmail.com'
