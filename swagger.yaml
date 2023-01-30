@@ -1,0 +1,38 @@
+paths:
+   /client/register:
+      post:
+         tags:
+            - Client
+         summary: Création d'un compte client
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     $ref: '#/definitions/Client'
+         responses:
+            201:
+               description: La création du client s'est bien exécutée
+            404:
+               description: Le client existe déjà
+            500:
+               description: Erreur interne du serveur
+definitions:
+   Client:
+      type: object
+      properties:
+         username:
+            type: string
+         mailClient:
+            type: string
+         mdpClient:
+            type: string
+         createdAt:
+            type: date
+         updatedAt:
+            type: date
+      example:
+         username: 'Cocoloco'
+         mailClient: 'cocoloco@gmail.com'
+         mdpClient: 'Cocoloco-33'

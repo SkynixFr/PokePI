@@ -10,7 +10,6 @@ const jwt = require('jsonwebtoken');
 
 const clientsRouter = Router();
 
-//Création du client
 clientsRouter.post('/register', async (req: Request, res: Response) => {
 	try {
 		const clientData: Client = req.body;
@@ -30,7 +29,7 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 		);
 
 		if (clientExist) {
-			return res.status(400).send('User already exist');
+			return res.status(404).send('User already exist');
 		}
 
 		//Test si le mot de passe suit un bon pattern (1 majuscule, 1 minuscule, 1 caractère spécial, 8 caractères minimum)
@@ -49,7 +48,7 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 		return res.status(201).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 
@@ -69,7 +68,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 		);
 
 		if (!clientExist) {
-			return res.status(400).send('User not found');
+			return res.status(404).send('User not found');
 		}
 
 		//Récupération des données du client en base de données
@@ -85,13 +84,13 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 			);
 
 			if (!valideMdp) {
-				return res.status(400).send('Wrong user data');
+				return res.status(404).send('Wrong user data');
 			}
 
 			clientData.mdpClient = clientDataBdd.mdpClient;
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
-			return res.status(404).send(message);
+			return res.status(500).send(message);
 		}
 
 		//Créé et assigne un token à l'utilisateur
@@ -104,7 +103,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 		});
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 
@@ -121,7 +120,7 @@ clientsRouter.get(
 			return res.status(201).send(result);
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
-			return res.status(400).send(message);
+			return res.status(500).send(message);
 		}
 	}
 );
@@ -149,7 +148,7 @@ clientsRouter.get(
 			);
 
 			if (!clientExist) {
-				return res.status(400).send('User not found');
+				return res.status(404).send('User not found');
 			}
 
 			//Test si le pokédex existe
@@ -157,14 +156,14 @@ clientsRouter.get(
 				clientData
 			);
 			if (!pokedexExist) {
-				return res.status(400).send('Pokedex not found');
+				return res.status(404).send('Pokedex not found');
 			}
 
 			const result = await clientController.getPokemonInPokedex(clientData);
 			return res.status(201).send(result);
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
-			return res.status(400).send(message);
+			return res.status(500).send(message);
 		}
 	}
 );
@@ -183,14 +182,14 @@ clientsRouter.delete('/', VerifyToken, async (req: Request, res: Response) => {
 		);
 
 		if (!clientExist) {
-			return res.status(400).send('User not found');
+			return res.status(404).send('User not found');
 		}
 
 		const result = await clientController.deleteByMail(req.body.mailClient);
 		return res.status(201).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 
@@ -209,14 +208,14 @@ clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
 		const clientExist = await clientService.checkMailExist(mailClient);
 
 		if (!clientExist) {
-			return res.status(400).send('Client not found');
+			return res.status(404).send('Client not found');
 		}
 
 		const result = await clientController.update(mailClient, clientToUpdate);
 		return res.status(201).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 

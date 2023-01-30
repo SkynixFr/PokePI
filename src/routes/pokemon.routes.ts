@@ -30,7 +30,7 @@ PokemonRouter.get('/', Cache, async (req: Request, res: Response) => {
 		);
 
 		if (pokemonExist) {
-			return res.status(400).send('Pokemon already exist');
+			return res.status(404).send('Pokemon already exist');
 		}
 
 		//Création 1 par 1 de pokémon à partir du tableau créé
@@ -40,7 +40,7 @@ PokemonRouter.get('/', Cache, async (req: Request, res: Response) => {
 		return res.status(201).send('Pokemon created');
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 

@@ -19,14 +19,14 @@ PokedexRouter.post('/', async (req: Request, res: Response) => {
 			data
 		);
 		if (pokedexExist) {
-			return res.status(400).send('Pokedex already exist');
+			return res.status(404).send('Pokedex already exist');
 		}
 
 		const result = await pokedexController.create(data);
 		return res.status(201).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 
@@ -48,14 +48,14 @@ PokedexRouter.delete('/:name', async (req: Request, res: Response) => {
 			data
 		);
 		if (!pokedexExist) {
-			return res.status(400).send('Pokedex not found');
+			return res.status(404).send('Pokedex not found');
 		}
 
 		const result = await pokedexController.deleteByPokemon(data);
 		return res.status(201).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(400).send(message);
+		return res.status(500).send(message);
 	}
 });
 export default PokedexRouter;
