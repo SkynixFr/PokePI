@@ -203,29 +203,36 @@ clientsRouter.delete('/', VerifyToken, async (req: Request, res: Response) => {
 });
 
 //Modification d'un client
-clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
-	const mailClient = req.body.mailClient;
-	const clientToUpdate = req.body.username;
+clientsRouter.put(
+	'/:name',
+	VerifyToken,
+	async (req: Request, res: Response) => {
+		const mailClient = req.body.mailClient;
+		const clientToUpdate = req.params.name;
 
-	try {
-		//Test si les données ne sont pas manquantes
-		if (!mailClient || !clientToUpdate) {
-			throw new Error('Something missing');
+		try {
+			//Test si les données ne sont pas manquantes
+			if (!mailClient || !clientToUpdate) {
+				throw new Error('Something missing');
+			}
+
+			//Test si l'utilisateur existe
+			const clientExist = await clientService.checkMailExist(mailClient);
+
+			if (!clientExist) {
+				return res.status(404).send('Client not found');
+			}
+
+			const result = await clientController.update(
+				mailClient,
+				clientToUpdate
+			);
+			return res.status(201).send(result);
+		} catch (error) {
+			let message = error instanceof Error ? error.message : 'Unknown error';
+			return res.status(500).send(message);
 		}
-
-		//Test si l'utilisateur existe
-		const clientExist = await clientService.checkMailExist(mailClient);
-
-		if (!clientExist) {
-			return res.status(404).send('Client not found');
-		}
-
-		const result = await clientController.update(mailClient, clientToUpdate);
-		return res.status(201).send(result);
-	} catch (error) {
-		let message = error instanceof Error ? error.message : 'Unknown error';
-		return res.status(500).send(message);
 	}
-});
+);
 
 export default clientsRouter;

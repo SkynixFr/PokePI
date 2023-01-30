@@ -74,8 +74,6 @@ export const update = async (
 ): Promise<Client> => {
 	const client = await Client.findByPk(mailClient);
 
-	console.log(client);
-
 	if (!client) {
 		throw new Error('Client not found');
 	}
