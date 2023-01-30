@@ -1,0 +1,292 @@
+paths:
+   /client/register:
+      post:
+         tags:
+            - Client
+         summary: Création d'un compte client
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     $ref: '#/definitions/Client'
+         responses:
+            201:
+               description: La création du client s'est bien exécutée
+            404:
+               description: Le mail existe déjà | Le pseudo existe déjà
+            500:
+               description: Erreur interne du serveur
+   /client/login:
+      post:
+         tags:
+            - Client
+         summary: Connexion d'un compte client
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     type: object
+                     example:
+                        mailClient: 'cocoloco@gmail.com'
+                        mdpClient: 'Cocoloco-33'
+         responses:
+            201:
+               description: La connexion du client s'est bien exécutée
+            404:
+               description: Le client n'existe pas | Mauvaise données envoyées
+            500:
+               description: Erreur interne du serveur
+   /client/{name}:
+      put:
+         tags:
+            - Client
+         summary: Modification d'un compte client
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+            - in: path
+              name: name
+              schema:
+                 type: string
+              required: true
+              description: Pseudo à modifier
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: La modification du client s'est bien exécutée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le client n'existe pas
+            500:
+               description: Erreur interne du serveur
+   /client:
+      delete:
+         tags:
+            - Client
+         summary: Supression d'un compte client
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         security:
+            - ApiKeyAuth: []
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     type: object
+                     example:
+                        mailClient: 'cocoloco@gmail.com'
+         responses:
+            201:
+               description: La suppression du client s'est bien exécutée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le client n'existe pas
+            500:
+               description: Erreur interne du serveur
+   /client/pokedex/pokemons:
+      get:
+         tags:
+            - Client
+         summary: Récupération de tous les pokémons d'un pokédex d'un client
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: La récupération s'est bien exécutée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            500:
+               description: Erreur interne du serveur
+   /client/pokedex/pokemon/{name}:
+      get:
+         tags:
+            - Client
+         summary: Récupération d'un d'un pokédex d'un client
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+            - in: path
+              name: name
+              schema:
+                 type: string
+              required: true
+              description: Nom du pokémon
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: La récupération s'est bien exécutée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            500:
+               description: Erreur interne du serveur
+   /pokemon:
+      get:
+         tags:
+            - Pokemon
+         summary: Récupération de tous les pokémons
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: L'ajout des pokémons s'est bien éxécuté
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Les Pokémons existe déjà
+            500:
+               description: Erreur interne du serveur
+   /pokedex:
+      post:
+         tags:
+            - Pokedex
+         summary: Ajout d'un Pokémon dans le Pokédex Client
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     type: object
+                     description: Nom Pokémon
+                     example:
+                        nomPokemon: 'Absol'
+
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: La création du Pokédex Client s'est bien effectuée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le pokédex Client existe déjà
+            500:
+               description: Erreur interne du serveur
+   /pokedex/{nom}:
+      delete:
+         tags:
+            - Pokedex
+         summary: Suppression d'un Pokémon du Pokédex Client
+         parameters:
+            - in: path
+              name: nom
+              schema:
+                 type: string
+              required: true
+              description: nomPokemon
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         security:
+            - ApiKeyAuth: []
+         responses:
+            201:
+               description: La suppression du pokémon du Pokédex Client s'est bien effectuée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le Pokémon à supprimer n'existe pas dans le Pokédex Client
+            500:
+               description: Erreur interne du serveur
+definitions:
+   Client:
+      type: object
+      properties:
+         username:
+            type: string
+            description: Pseudo d'un client
+         mailClient:
+            type: string
+            description: Mail d'un client
+         mdpClient:
+            type: string
+            description: Mot de passe d'un client
+         createdAt:
+            type: date
+            description: Date de création du compte d'un client
+         updatedAt:
+            type: date
+            description: Date de modification du compte d'un client
+      example:
+         username: 'Cocoloco'
+         mailClient: 'cocoloco@gmail.com'
+         mdpClient: 'Cocoloco-33'
+   Pokemon:
+      type: object
+      properties:
+      nompokemon:
+         type: string
+         description: Nom d'un Pokémon
+      example:
+         nompokemon: 'absol'
+   Pokedex:
+      type: object
+      properties:
+      mailClient:
+         type: string
+         description: Mail du client
+      nompokemon:
+         type: string
+         description: Nom d'un Pokémon
+      example:
+         mailClient: 'cocoloco@gmail.com'
+         nomPokemon: 'absol'
+components:
+   ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-access-token
+   responses:
+      UnauthorizedError:
+         description: La clé d'API est invalide ou manquante
+         headers:
+            x-access-token:
+               schema:
+                  type: string

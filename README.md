@@ -4,7 +4,7 @@ API qui permet à l'utilisateur de fabriquer son propre pokédex de pokémons
 
 ## Initialisation
 
-Ne pas oublier de créer un fichier db.config.ts dans le dossier /config. Il faut mettre le code du fichier exemple.config.ts et rentrer vos propre valeur.
+Afin de lancer l'application et de construire dans la base de données il faut initialiser un fichier appelé ```.env```. Un exemple des données à mettre dans ce fichier est disponible dans ```.exemple.env```
 
 ## Script d'installation de la base de donnée
 
