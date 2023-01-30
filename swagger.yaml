@@ -165,7 +165,7 @@ paths:
             - ApiKeyAuth: []
          responses:
             201:
-               description: L'ajout des pokémons s'est bien éxécutée
+               description: L'ajout des pokémons s'est bien éxécuté
             401:
                $ref: '#/components/responses/UnauthorizedError'
             404:
@@ -199,7 +199,7 @@ paths:
             - ApiKeyAuth: []
          responses:
             201:
-               description: La création du Pokédex Client s'est bien effectué
+               description: La création du Pokédex Client s'est bien effectuée
             401:
                $ref: '#/components/responses/UnauthorizedError'
             404:
@@ -228,7 +228,7 @@ paths:
             - ApiKeyAuth: []
          responses:
             201:
-               description: La suppréssion du pokémon du Pokédex Client s'est bien effectué
+               description: La suppression du pokémon du Pokédex Client s'est bien effectuée
             401:
                $ref: '#/components/responses/UnauthorizedError'
             404:
