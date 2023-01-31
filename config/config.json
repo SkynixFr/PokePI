@@ -1,0 +1,24 @@
+{
+	"development": {
+		"username": "romain",
+		"password": "LouRom-33%",
+		"database": "pokepi",
+		"host": "localhost",
+		"dialect": "mysql",
+		"seedStorage": "sequelize"
+	},
+	"test": {
+		"username": "root",
+		"password": null,
+		"database": "database_test",
+		"host": "127.0.0.1",
+		"dialect": "mysql"
+	},
+	"production": {
+		"username": "root",
+		"password": null,
+		"database": "database_production",
+		"host": "127.0.0.1",
+		"dialect": "mysql"
+	}
+}
