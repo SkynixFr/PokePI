@@ -7,6 +7,7 @@ import dbInit from './db/init';
 
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const rateLimit = require('express-rate-limit');
 
 //Récupération des données dans le fichier .env
 dotenv.config();
@@ -37,11 +38,20 @@ const swaggerOptions = {
 
 const swaggerJsDocs = swaggerJsDoc(swaggerOptions);
 
+//Configuration du limiter
+const limiter = rateLimit({
+	max: 10,
+	windowMs: 1000 * 60,
+	message: 'Too many request from this IP'
+});
+
 //Lancement du serveur Express
 const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(limiter);
+
 app.use('/api/v1', routes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDocs));
 
