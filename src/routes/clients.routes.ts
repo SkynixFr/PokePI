@@ -29,7 +29,7 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 		);
 
 		if (clientExist) {
-			return res.status(404).send('Mail already exist');
+			return res.status(409).send('Mail already exist');
 		}
 
 		//Test si le pseudo de l'utilisateur existe
@@ -38,7 +38,7 @@ clientsRouter.post('/register', async (req: Request, res: Response) => {
 		);
 
 		if (clientUsernameExist) {
-			return res.status(404).send('Username already exist');
+			return res.status(409).send('Username already exist');
 		}
 
 		//Test si le mot de passe suit un bon pattern (1 majuscule, 1 minuscule, 1 caractère spécial, 8 caractères minimum)
@@ -93,7 +93,7 @@ clientsRouter.post('/login', async (req: Request, res: Response) => {
 			);
 
 			if (!valideMdp) {
-				return res.status(404).send('Wrong user data');
+				return res.status(401).send('Wrong user data');
 			}
 
 			clientData.mdpClient = clientDataBdd.mdpClient;
@@ -126,7 +126,7 @@ clientsRouter.get(
 			const result = await clientController.getPokemonsInPokedex(
 				req.body.mailClient
 			);
-			return res.status(201).send(result);
+			return res.status(200).send(result);
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
 			return res.status(500).send(message);
@@ -169,7 +169,7 @@ clientsRouter.get(
 			}
 
 			const result = await clientController.getPokemonInPokedex(clientData);
-			return res.status(201).send(result);
+			return res.status(200).send(result);
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
 			return res.status(500).send(message);
@@ -195,7 +195,7 @@ clientsRouter.delete('/', VerifyToken, async (req: Request, res: Response) => {
 		}
 
 		const result = await clientController.deleteByMail(req.body.mailClient);
-		return res.status(201).send(result);
+		return res.status(200).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
 		return res.status(500).send(message);
@@ -227,7 +227,7 @@ clientsRouter.put(
 				mailClient,
 				clientToUpdate
 			);
-			return res.status(201).send(result);
+			return res.status(200).send(result);
 		} catch (error) {
 			let message = error instanceof Error ? error.message : 'Unknown error';
 			return res.status(500).send(message);

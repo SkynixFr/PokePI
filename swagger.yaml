@@ -14,7 +14,7 @@ paths:
          responses:
             201:
                description: La création du client s'est bien exécutée
-            404:
+            409:
                description: Le mail existe déjà | Le pseudo existe déjà
             500:
                description: Erreur interne du serveur
@@ -61,7 +61,7 @@ paths:
          security:
             - ApiKeyAuth: []
          responses:
-            201:
+            200:
                description: La modification du client s'est bien exécutée
             401:
                $ref: '#/components/responses/UnauthorizedError'
@@ -93,7 +93,7 @@ paths:
                      example:
                         mailClient: 'cocoloco@gmail.com'
          responses:
-            201:
+            200:
                description: La suppression du client s'est bien exécutée
             401:
                $ref: '#/components/responses/UnauthorizedError'
@@ -116,7 +116,7 @@ paths:
          security:
             - ApiKeyAuth: []
          responses:
-            201:
+            200:
                description: La récupération s'est bien exécutée
             401:
                $ref: '#/components/responses/UnauthorizedError'
@@ -126,7 +126,7 @@ paths:
       get:
          tags:
             - Client
-         summary: Récupération d'un d'un pokédex d'un client
+         summary: Récupération d'un pokémon d'un pokédex d'un client
          parameters:
             - in: header
               name: x-access-token
@@ -143,10 +143,12 @@ paths:
          security:
             - ApiKeyAuth: []
          responses:
-            201:
+            200:
                description: La récupération s'est bien exécutée
             401:
                $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le pokémon n'existe pas dans le pokédex client
             500:
                description: Erreur interne du serveur
    /pokemon:
@@ -164,12 +166,14 @@ paths:
          security:
             - ApiKeyAuth: []
          responses:
-            201:
+            200:
                description: L'ajout des pokémons s'est bien éxécuté
             401:
                $ref: '#/components/responses/UnauthorizedError'
             404:
-               description: Les Pokémons existe déjà
+               description: Le client n'existe pas
+            409:
+               description: le Pokémon existe déjà
             500:
                description: Erreur interne du serveur
    /pokedex:
@@ -187,7 +191,6 @@ paths:
                      description: Nom Pokémon
                      example:
                         nomPokemon: 'Absol'
-
          parameters:
             - in: header
               name: x-access-token
@@ -202,8 +205,8 @@ paths:
                description: La création du Pokédex Client s'est bien effectuée
             401:
                $ref: '#/components/responses/UnauthorizedError'
-            404:
-               description: Le pokédex Client existe déjà
+            409:
+               description: Le Pokémon existe déjà dans pokédex Client
             500:
                description: Erreur interne du serveur
    /pokedex/{nom}:
@@ -227,7 +230,7 @@ paths:
          security:
             - ApiKeyAuth: []
          responses:
-            201:
+            200:
                description: La suppression du pokémon du Pokédex Client s'est bien effectuée
             401:
                $ref: '#/components/responses/UnauthorizedError'

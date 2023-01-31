@@ -19,7 +19,7 @@ PokedexRouter.post('/', async (req: Request, res: Response) => {
 			data
 		);
 		if (pokedexExist) {
-			return res.status(404).send('Pokedex already exist');
+			return res.status(409).send('Pokedex already exist');
 		}
 
 		const result = await pokedexController.create(data);
@@ -52,7 +52,7 @@ PokedexRouter.delete('/:name', async (req: Request, res: Response) => {
 		}
 
 		const result = await pokedexController.deleteByPokemon(data);
-		return res.status(201).send(result);
+		return res.status(200).send(result);
 	} catch (error) {
 		let message = error instanceof Error ? error.message : 'Unknown error';
 		return res.status(500).send(message);
