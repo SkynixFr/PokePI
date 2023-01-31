@@ -29,7 +29,7 @@ module.exports = {
 		await queryInterface.bulkInsert('Clients', [
 			{
 				mailClient: 'cocoloco@gmail.com',
-				username: 'Cocoloc',
+				username: 'Cocoloco',
 				mdpClient: passwordCoco,
 				createdAt: new Date(),
 				updatedAt: new Date()
