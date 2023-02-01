@@ -43,12 +43,24 @@ export const getPokemonInPokedex = async (data: any): Promise<Client> => {
 };
 
 //Modification d'un client
-export const update = async (
+export const updateUsername = async (
 	mailClient: string,
-	data: any
+	username: string
 ): Promise<Client> => {
 	try {
-		return service.update(mailClient, data);
+		return service.updateUsername(mailClient, username);
+	} catch (error) {
+		throw error;
+	}
+};
+
+//Modification d'un client
+export const updatePassword = async (
+	mailClient: string,
+	mdpClient: string
+): Promise<Client> => {
+	try {
+		return service.updatePassword(mailClient, mdpClient);
 	} catch (error) {
 		throw error;
 	}

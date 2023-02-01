@@ -42,35 +42,6 @@ paths:
                description: Le client n'existe pas
             500:
                description: Erreur interne du serveur
-   /client/{name}:
-      put:
-         tags:
-            - Client
-         summary: Modification d'un compte client
-         parameters:
-            - in: header
-              name: x-access-token
-              schema:
-                 type: string
-              required: true
-              description: Token de connexion
-            - in: path
-              name: name
-              schema:
-                 type: string
-              required: true
-              description: Pseudo à modifier
-         security:
-            - ApiKeyAuth: []
-         responses:
-            200:
-               description: La modification du client s'est bien exécutée
-            401:
-               $ref: '#/components/responses/UnauthorizedError'
-            404:
-               description: Le client n'existe pas
-            500:
-               description: Erreur interne du serveur
    /client:
       delete:
          tags:
@@ -101,6 +72,40 @@ paths:
                $ref: '#/components/responses/UnauthorizedError'
             404:
                description: Le client n'existe pas
+            500:
+               description: Erreur interne du serveur
+      put:
+         tags:
+            - Client
+         summary: Modification d'un compte client
+         parameters:
+            - in: header
+              name: x-access-token
+              schema:
+                 type: string
+              required: true
+              description: Token de connexion
+         requestBody:
+            description: Données a envoyé
+            required: true
+            content:
+               application/json:
+                  schema:
+                     type: object
+                     example:
+                        username: 'Cocoloccccccccccco'
+                        mpdClient: 'Cocoleplusbeau-33'
+         security:
+            - ApiKeyAuth: []
+         responses:
+            200:
+               description: La modification du client s'est bien exécutée
+            401:
+               $ref: '#/components/responses/UnauthorizedError'
+            404:
+               description: Le client n'existe pas
+            409:
+               description: Le pseudo existe déjà | Le mot de passe est similaire à celui déjà présent en bdd
             500:
                description: Erreur interne du serveur
    /client/pokedex/pokemons:

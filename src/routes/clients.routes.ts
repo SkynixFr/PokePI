@@ -5,6 +5,7 @@ import * as clientService from '../services/client.service';
 import * as pokedexService from '../services/pokedex.service';
 import VerifyToken from '../middlewares/authToken';
 import Cache from '../middlewares/cache';
+import { nextTick } from 'process';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -203,36 +204,77 @@ clientsRouter.delete('/', VerifyToken, async (req: Request, res: Response) => {
 });
 
 //Modification d'un client
-clientsRouter.put(
-	'/:name',
-	VerifyToken,
-	async (req: Request, res: Response) => {
-		const mailClient = req.body.mailClient;
-		const clientToUpdate = req.params.name;
+clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
+	try {
+		const updateClientData = req.body;
 
-		try {
-			//Test si les données ne sont pas manquantes
-			if (!mailClient || !clientToUpdate) {
-				throw new Error('Something missing');
+		console.log(updateClientData);
+
+		//Test si des données sont existantes
+		if (Object.keys(updateClientData).length <= 1) {
+			return res.status(401).send('Data missing');
+		}
+
+		//Test s'il y a un username à modifier
+		if (updateClientData.username) {
+			//Test si l'username existe
+			const usernameExist = await clientService.checkUsernameExist(
+				updateClientData.username
+			);
+
+			if (usernameExist) {
+				return res.status(409).send('Username already exist');
 			}
+		}
 
-			//Test si l'utilisateur existe
-			const clientExist = await clientService.checkMailExist(mailClient);
+		//Test s'il y a un mdp à modifier
+		if (updateClientData.mdpClient) {
+			//Test si le mot de passe est différent
+			const checkPassword = await clientController.getByMail(
+				updateClientData.mailClient
+			);
 
-			if (!clientExist) {
+			if (!checkPassword) {
 				return res.status(404).send('Client not found');
 			}
 
-			const result = await clientController.update(
-				mailClient,
-				clientToUpdate
+			const validPassword = await bcrypt.compare(
+				updateClientData.mdpClient,
+				checkPassword.mdpClient
 			);
-			return res.status(200).send(result);
-		} catch (error) {
-			let message = error instanceof Error ? error.message : 'Unknown error';
-			return res.status(500).send(message);
+
+			if (validPassword) {
+				return res.status(409).send('Same password');
+			}
+
+			const mdpRegex = new RegExp(
+				'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$'
+			);
+
+			if (!mdpRegex.test(updateClientData.mdpClient)) {
+				throw new Error('Wrong password');
+			}
+
+			const newPassword = await bcrypt.hash(updateClientData.mdpClient, 10);
+
+			await clientController.updatePassword(
+				updateClientData.mailClient,
+				newPassword
+			);
 		}
+
+		await clientController.updateUsername(
+			updateClientData.mailClient,
+			updateClientData.username
+		);
+
+		const result = await clientController.getByMail(req.body.mailClient);
+
+		return res.status(200).send(result);
+	} catch (error) {
+		let message = error instanceof Error ? error.message : 'Unknown error';
+		return res.status(500).send(message);
 	}
-);
+});
 
 export default clientsRouter;

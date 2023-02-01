@@ -67,18 +67,33 @@ export const getPokemonInPokedex = async (data: any): Promise<Client> => {
 	return client;
 };
 
-//Modification d'un client
-export const update = async (
+//Modification du pseudo d'un client
+export const updateUsername = async (
 	mailClient: string,
-	data: any
+	username: string
 ): Promise<Client> => {
 	const client = await Client.findByPk(mailClient);
 
 	if (!client) {
 		throw new Error('Client not found');
 	}
+	client.username = username;
+	client.save();
 
-	client.username = data;
+	return client;
+};
+
+//Modification du mot de passe d'un client
+export const updatePassword = async (
+	mailClient: string,
+	mdpClient: string
+): Promise<Client> => {
+	const client = await Client.findByPk(mailClient);
+
+	if (!client) {
+		throw new Error('Client not found');
+	}
+	client.mdpClient = mdpClient;
 	client.save();
 
 	return client;
@@ -91,6 +106,9 @@ export const getByUsername = async (username: string): Promise<Client> => {
 			username: username
 		}
 	});
+
+	console.log(client);
+
 	if (!client) {
 		throw new Error('Not found');
 	}

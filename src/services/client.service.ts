@@ -48,10 +48,18 @@ export const getPokemonInPokedex = async (data: any): Promise<Client> => {
 	return repository.getPokemonInPokedex(data);
 };
 
-//Modification d'un client
-export const update = async (
+//Modification du pseudo d'un client
+export const updateUsername = async (
 	mailClient: string,
-	data: any
+	username: string
 ): Promise<Client> => {
-	return repository.update(mailClient, data);
+	return repository.updateUsername(mailClient, username);
+};
+
+//Modification du mot de passe d'un client
+export const updatePassword = async (
+	mailClient: string,
+	mdpClient: string
+): Promise<Client> => {
+	return repository.updatePassword(mailClient, mdpClient);
 };
