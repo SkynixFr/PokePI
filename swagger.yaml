@@ -36,8 +36,10 @@ paths:
          responses:
             201:
                description: La connexion du client s'est bien exécutée
+            401:
+               description: Mauvaise données envoyées
             404:
-               description: Le client n'existe pas | Mauvaise données envoyées
+               description: Le client n'existe pas
             500:
                description: Erreur interne du serveur
    /client/{name}:
@@ -215,18 +217,18 @@ paths:
             - Pokedex
          summary: Suppression d'un Pokémon du Pokédex Client
          parameters:
-            - in: path
-              name: nom
-              schema:
-                 type: string
-              required: true
-              description: nomPokemon
             - in: header
               name: x-access-token
               schema:
                  type: string
               required: true
               description: Token de connexion
+            - in: path
+              name: nom
+              schema:
+                 type: string
+              required: true
+              description: nomPokemon
          security:
             - ApiKeyAuth: []
          responses:
