@@ -3,7 +3,7 @@
 
 Pokepi est une API restful qui permet à un utilisateur de créer son pokédex de pokémons
 
-<img src=https://github.com/SkynixFr/PokePI/blob/main/assets/pokepi.png?raw=true alt=pokegif>
+![Alt Text](https://github.com/SkynixFr/PokePI/blob/main/assets/pikachu-oh-yeah.gif?raw=true)
 
 </div>
 
@@ -26,7 +26,7 @@ Pokepi est une API restful qui permet à un utilisateur de créer son pokédex d
 - ![mysql](https://img.shields.io/badge/mysql-4.9.4-blue.svg)
 - ![pokeapi](https://img.shields.io/badge/pokeapi-v2-blue.svg)
 
-## Setup ![express](https://img.shields.io/badge/express-4.18.2-blue.svg)
+## Setup
 
 - Télécharger le code source
 
