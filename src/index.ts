@@ -40,7 +40,7 @@ const swaggerJsDocs = swaggerJsDoc(swaggerOptions);
 
 //Configuration du limiter
 const limiter = rateLimit({
-	max: 10,
+	max: 20,
 	windowMs: 1000 * 60,
 	message: 'Too many request from this IP'
 });

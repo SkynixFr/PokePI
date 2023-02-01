@@ -1,31 +1,72 @@
 <div align="center">
-    <img src="https://github.com/SkynixFr/PokePI/assets/pokepi.png alt="Pokepi">
-</div>
+<img src=https://github.com/SkynixFr/PokePI/blob/main/assets/pokepi.png?raw=true alt=PokePI />
 
 Pokepi est une API restful qui permet à un utilisateur de créer son pokédex de pokémons
 
-## Initialisation
+<img src=https://github.com/SkynixFr/PokePI/blob/main/assets/pokepi.png?raw=true alt=pokegif>
 
-Afin créer une connexion à la base de données, il faut initialiser un fichier appelé `.env`. Un exemple des données à mettre dans ce fichier est disponible dans `.exemple.env`
+</div>
 
-Pour installer les modules nécessaire au projet il faut lancer dans un terminal la commannde : `npm install`
+## Features
 
-## Migrations
+- Création, modificatione et suppression d'un compte client
+- Authentification sécurisé d'un client
+- Création et suppression d'un pokédex
+- Récupération de pokémons grâce à l'api [PokeAPI](https://pokeapi.co)
+- Récupération de tous les pokémons d'un pokédex d'un client
+- Récupération d'un pokémon d'un pokédex d'un client
+- Ajout d'un rate limiter à 20 requêtes toutes les minutes
+- Ajout d'un système de migration et de fixtures disponible au lancement du projet
+- Documentation des routes disponible sur [Swagger](http://localhost:8080/api-docs)
 
-Afin d'utiliser le système de migrations mis en place, au lancement de l'application avant le démarrage du serveur il faut lancer les commandes `npm run migration` et `npm run seed`. Ces commandes permettront d'initaliser les tables de la base de données et d'y implémenter des données factices.
+## Stack
 
-Le mot de passe du client Skynix est : `JesuisunMDP-33`
-Le mot de passe du client Luffysonic est : `JesuisunMDP-34`
-Le mot de passe du client Cocoloco est : `JesuisunMDP-35`
+- ![typescript](https://img.shields.io/badge/typescript-4.9.4-blue.svg) 
+- ![express](https://img.shields.io/badge/express-4.18.2-blue.svg)
+- ![mysql](https://img.shields.io/badge/mysql-4.9.4-blue.svg)
+- ![pokeapi](https://img.shields.io/badge/pokeapi-v2-blue.svg)
 
-Pour réinitialiser la base, il faut lancer la commande `npm run remove_migration`
+## Setup ![express](https://img.shields.io/badge/express-4.18.2-blue.svg)
 
-## Démarrage
+- Télécharger le code source
 
-Pour lancer le serveur il vous faudra au préalable une base de données MySQL. La création des tables est géré par le programme.
+```sh
+git clone https://github.com/SkynixFr/PokePI.git
+```
 
-Pour lancer le serveur utilisez la commande `npm run dev`
+- Installer les dépendances
+  
+```sh
+npm install
+```
 
-## Les routes
+- Initialisation de la connexion à la base de données : 
 
-Les routes principales du projet et leurs descriptifs pourront être retrouvé dans l'url suivante : `http://localhost:{PORT}/api-docs`. `{PORT}` sera le numéro de port que vous avez attribué au lancement de l'application.
+Un fichier `.exemple.env` recense toutes les variables à compléter dans un fichier `.env`
+
+- Migrations
+
+Un système de migration et de seed est disponible. Il permet d'initialiser la base de données et d'y ajouter des données factices.
+
+Pour cela 2 commandes sont à lancer avant le lancement du serveur :
+
+```sh
+npm run migration
+```
+
+```sh
+npm run seed
+```
+
+Les données factices se retrouvent dans le fichier : [demo-client](https://github.com/SkynixFr/PokePI/blob/main/seeders/20230131094058-demo-client.js)
+ 
+Une troisème commande est disponible pour réinitialiser la base de données : 
+```sh
+npm run remove_migration
+```
+
+- Lancement du serveur
+  
+```sh
+npm run dev
+```
