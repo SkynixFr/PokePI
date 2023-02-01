@@ -1,7 +1,7 @@
 <div align="center">
 <img src=https://github.com/SkynixFr/PokePI/blob/main/assets/pokepi.png?raw=true alt=PokePI />
 
-[![GitHub contributors](https://img.shields.io/github/contributors/SkynixFr/PokePi.svg)](https://github.com/OWNER/REPO/graphs/contributors)
+![GitHub contributors](https://img.shields.io/github/contributors/SkynixFr/PokePi.svg)
 
 </div>
 
@@ -9,15 +9,15 @@ Pokepi est une API restful qui permet à un utilisateur de créer son pokédex d
 
 ## Features
 
-- Création, modificatione et suppression d'un compte client
-- Authentification sécurisé d'un client
+- Création, modification et suppression d'un compte client
+- Authentification sécurisée d'un client
 - Création et suppression d'un pokédex
-- Récupération de pokémons grâce à l'api [PokeAPI](https://pokeapi.co)
+- Récupération de pokémons grâce à l'API [PokeAPI](https://pokeapi.co)
 - Récupération de tous les pokémons d'un pokédex d'un client
 - Récupération d'un pokémon d'un pokédex d'un client
 - Ajout d'un rate limiter à 20 requêtes toutes les minutes
-- Ajout d'un système de migration et de fixtures disponible au lancement du projet
-- Documentation des routes disponible sur [Swagger](http://localhost:8080/api-docs)
+- Ajout d'un système de migrations et de fixtures disponibles au lancement du projet
+- Documentation des routes disponibles sur [Swagger](http://localhost:8080/api-docs)
 
 ## Stack
 
@@ -48,7 +48,7 @@ Un fichier `.exemple.env` recense toutes les variables à compléter dans un fic
 
 Un système de migration et de seed est disponible. Il permet d'initialiser la base de données et d'y ajouter des données factices.
 
-Pour cela 2 commandes sont à lancer avant le lancement du serveur :
+Pour cela, 2 commandes sont à lancer avant le lancement du serveur :
 
 ```sh
 npm run migration
@@ -58,9 +58,9 @@ npm run migration
 npm run seed
 ```
 
-Les données factices se retrouvent dans le fichier : [demo-client](https://github.com/SkynixFr/PokePI/blob/main/seeders/20230131094058-demo-client.js)
+Les données factices se trouvent dans le fichier : [demo-client](https://github.com/SkynixFr/PokePI/blob/main/seeders/20230131094058-demo-client.js)
  
-Une troisème commande est disponible pour réinitialiser la base de données : 
+Une troisième commande est disponible pour réinitialiser la base de données : 
 ```sh
 npm run remove_migration
 ```
