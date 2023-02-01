@@ -1,11 +1,11 @@
 <div align="center">
 <img src=https://github.com/SkynixFr/PokePI/blob/main/assets/pokepi.png?raw=true alt=PokePI />
 
-Pokepi est une API restful qui permet à un utilisateur de créer son pokédex de pokémons
-
-![Alt Text](https://github.com/SkynixFr/PokePI/blob/main/assets/pikachu-wink.gif?raw=true)
+[![GitHub contributors](https://img.shields.io/github/contributors/SkynixFr/PokePi.svg)](https://github.com/OWNER/REPO/graphs/contributors)
 
 </div>
+
+Pokepi est une API restful qui permet à un utilisateur de créer son pokédex de pokémons
 
 ## Features
 
@@ -76,3 +76,13 @@ npm run dev
 ![Alt Text](https://github.com/SkynixFr/PokePI/blob/main/assets/pikachu-oh-yeah.gif?raw=true)
 
 </div>
+
+## Contributeurs
+
+<div align=center>
+
+<img src="https://github.com/SkynixFr.png" width="100" style="border-radius: 50%">
+<img src="https://github.com/Luffysonic.png" width="100" style="border-radius: 50%">
+
+</div>
+
