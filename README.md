@@ -1,6 +1,8 @@
-# PokePI
+<div align="center">
+    <img src="https://github.com/SkynixFr/PokePI/assets/pokepi.png alt="Pokepi">
+</div>
 
-Pokepi est une API qui permet à l'utilisateur de fabriquer son propre pokédex de pokémons
+Pokepi est une API restful qui permet à un utilisateur de créer son pokédex de pokémons
 
 ## Initialisation
 
