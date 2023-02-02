@@ -208,12 +208,21 @@ clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
 	try {
 		const updateClientData = req.body;
 
-		console.log(updateClientData);
-
 		//Test si des données sont existantes
 		if (Object.keys(updateClientData).length <= 1) {
 			return res.status(401).send('Data missing');
 		}
+
+		//Test si le client existe
+		const clientExist = await clientController.getByMail(
+			updateClientData.mailClient
+		);
+
+		if (!clientExist) {
+			return res.status(404).send('Client not found');
+		}
+
+		console.log(clientExist.username);
 
 		//Test s'il y a un username à modifier
 		if (updateClientData.username) {
@@ -225,13 +234,18 @@ clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
 			if (usernameExist) {
 				return res.status(409).send('Username already exist');
 			}
+
+			await clientController.updateUsername(
+				clientExist.mailClient,
+				updateClientData.username
+			);
 		}
 
 		//Test s'il y a un mdp à modifier
 		if (updateClientData.mdpClient) {
 			//Test si le mot de passe est différent
 			const checkPassword = await clientController.getByMail(
-				updateClientData.mailClient
+				clientExist.mailClient
 			);
 
 			if (!checkPassword) {
@@ -258,17 +272,12 @@ clientsRouter.put('/', VerifyToken, async (req: Request, res: Response) => {
 			const newPassword = await bcrypt.hash(updateClientData.mdpClient, 10);
 
 			await clientController.updatePassword(
-				updateClientData.mailClient,
+				clientExist.mailClient,
 				newPassword
 			);
 		}
 
-		await clientController.updateUsername(
-			updateClientData.mailClient,
-			updateClientData.username
-		);
-
-		const result = await clientController.getByMail(req.body.mailClient);
+		const result = await clientController.getByMail(clientExist.mailClient);
 
 		return res.status(200).send(result);
 	} catch (error) {
