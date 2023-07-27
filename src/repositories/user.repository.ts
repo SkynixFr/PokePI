@@ -80,3 +80,13 @@ export const findUserById = async (id: string) => {
 		}
 	});
 };
+
+//  Ajout de pokémons au pokédex de l'utilisateur
+export const addPokemons = async (id: string, pokemons: string[]) => {
+	return prisma.user.update({
+		where: { id: id },
+		data: {
+			pokedex: { set: pokemons }
+		}
+	});
+};

@@ -43,3 +43,8 @@ export const checkIfUserExistById = async (id: string) => {
 	const user = await repository.findUserById(id);
 	return user !== null;
 };
+
+//  Ajout de pokémons au pokédex de l'utilisateur
+export const addPokemons = async (id: string, pokemons: string[]) => {
+	return await repository.addPokemons(id, pokemons);
+};

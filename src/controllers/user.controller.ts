@@ -214,3 +214,30 @@ export const refreshToken = async (req: Request, res: Response) => {
 		});
 	});
 };
+
+//	Création des pokémons dans le pokédex de l'utilisateur
+export const addPokemons = async (req: Request, res: Response) => {
+	const { user, pokemons } = req.body;
+
+	if (!user || !pokemons) {
+		return res
+			.status(400)
+			.send('Missing required data. Please provide pokemons.');
+	}
+
+	const existingUser = await service.getUser(user.email);
+
+	if (!existingUser) {
+		return res.status(404).send('User not found');
+	}
+
+	const uniquePokemons = [...new Set([...existingUser.pokedex, ...pokemons])];
+
+	try {
+		const updatedUser = await service.addPokemons(user.id, uniquePokemons);
+		return res.status(200).send(updatedUser);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send('Error while updating the user');
+	}
+};

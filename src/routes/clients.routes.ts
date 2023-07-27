@@ -8,24 +8,27 @@ const clientsRouter = Router();
 clientsRouter.get('/me', authToken, clientController.getUserConnected);
 
 //  Récupération de tous les utilisateurs
-clientsRouter.get('/', clientController.getUsers);
+clientsRouter.get('/', authToken, clientController.getUsers);
 
 //  Récupération d'un utilisateur par son email ou pseudo
-clientsRouter.get('/:user', clientController.getUser);
+clientsRouter.get('/:user', authToken, clientController.getUser);
 
 //  Création d'un utilisateur
 clientsRouter.post('/register', clientController.register);
 
 //  Modification d'un utilisateur
-clientsRouter.put('/:id', clientController.updateUser);
+clientsRouter.put('/:id', authToken, clientController.updateUser);
 
 //  Suppression d'un utilisateur
-clientsRouter.delete('/:id', clientController.deleteUser);
+clientsRouter.delete('/:id', authToken, clientController.deleteUser);
 
 //  Connexion d'un utilisateur
 clientsRouter.post('/login', clientController.login);
 
 //  Refresh token
 clientsRouter.post('/refreshToken', clientController.refreshToken);
+
+//  Création de pokémon dans le pokédex de l'utilisateur
+clientsRouter.post('/pokemons', authToken, clientController.addPokemons);
 
 export default clientsRouter;
