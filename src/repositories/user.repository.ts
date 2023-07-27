@@ -4,13 +4,12 @@ const prisma = new PrismaClient();
 
 //  Récupération de tous les utilisateurs
 export const getUsers = async () => {
-	const users = await prisma.user.findMany();
-	return users;
+	return await prisma.user.findMany();
 };
 
 //  Récupération d'un utilisateur par son pseudo ou email
 export const getUser = async (data: string) => {
-	const user = await prisma.user.findFirst({
+	return await prisma.user.findFirst({
 		where: {
 			OR: [
 				{
@@ -22,7 +21,6 @@ export const getUser = async (data: string) => {
 			]
 		}
 	});
-	return user;
 };
 
 //  Création d'un utilisateur
@@ -31,14 +29,32 @@ export const createUser = async (
 	email: string,
 	password: string
 ) => {
-	const user = await prisma.user.create({
+	return await prisma.user.create({
 		data: {
 			username,
 			email,
 			password
 		}
 	});
-	return user;
+};
+
+//  Modification d'un utilisateur
+export const updateUser = async (id: string, data: string) => {
+	return await prisma.user.update({
+		where: {
+			id: id
+		},
+		data: data
+	});
+};
+
+//  Suppression d'un utilisateur
+export const deleteUser = async (id: string) => {
+	await prisma.user.delete({
+		where: {
+			id: id
+		}
+	});
 };
 
 //  Recherche d'un utilisateur par son pseudo ou email
@@ -49,6 +65,15 @@ export const findUser = async (username: string, email: string) => {
 				{ username: { equals: username, mode: 'insensitive' } },
 				{ email: { equals: username, mode: 'insensitive' } }
 			]
+		}
+	});
+};
+
+//  Recherche d'un utilisateur par son id
+export const findUserById = async (id: string) => {
+	return await prisma.user.findUnique({
+		where: {
+			id: id
 		}
 	});
 };

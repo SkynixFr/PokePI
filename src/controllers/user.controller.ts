@@ -56,3 +56,55 @@ export const createUser = async (req: Request, res: Response) => {
 		return res.status(500).send('Error while creating the user');
 	}
 };
+
+// Modification d'un utilisateur
+export const updateUser = async (req: Request, res: Response) => {
+	const userId = req.params.id;
+	const data = req.body;
+
+	if (JSON.stringify(data) === '{}') {
+		return res
+			.status(400)
+			.send(
+				'Missing required data. Please provide email, username, or password.'
+			);
+	}
+
+	const userExist = await service.checkIfUserExistById(userId);
+
+	if (!userExist) {
+		return res.status(404).send('User not found');
+	}
+
+	if (data.password) {
+		const hashedPassword = await bcrypt.hash(data.password, 10);
+		data.password = hashedPassword;
+	}
+
+	try {
+		const updatedUser = await service.updateUser(userId, data);
+		return res.status(200).send(updatedUser);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send('Error while updating the user');
+	}
+};
+
+//	Suppression d'un utilisateur
+export const deleteUser = async (req: Request, res: Response) => {
+	const userId = req.params.id;
+
+	const userExist = await service.checkIfUserExistById(userId);
+
+	if (!userExist) {
+		return res.status(404).send('User not found');
+	}
+
+	try {
+		await service.deleteUser(userId);
+		return res.status(200).send('User deleted');
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send('Error while updating the user');
+	}
+};

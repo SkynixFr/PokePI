@@ -13,6 +13,9 @@ clientsRouter.get('/:user', clientController.getUser);
 clientsRouter.post('/register', clientController.createUser);
 
 //  Modification d'un utilisateur
-clientsRouter.put('/:user');
+clientsRouter.put('/:id', clientController.updateUser);
+
+//  Suppression d'un utilisateur
+clientsRouter.delete('/:id', clientController.deleteUser);
 
 export default clientsRouter;
