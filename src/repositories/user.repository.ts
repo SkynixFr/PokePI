@@ -58,12 +58,15 @@ export const deleteUser = async (id: string) => {
 };
 
 //  Recherche d'un utilisateur par son pseudo ou email
-export const findUser = async (username: string, email: string) => {
+export const findUserByUsernameOrEmail = async (
+	username: string,
+	email: string
+) => {
 	return await prisma.user.findFirst({
 		where: {
 			OR: [
 				{ username: { equals: username, mode: 'insensitive' } },
-				{ email: { equals: username, mode: 'insensitive' } }
+				{ email: { equals: email, mode: 'insensitive' } }
 			]
 		}
 	});

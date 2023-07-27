@@ -30,8 +30,11 @@ export const deleteUser = async (id: string) => {
 };
 
 //  Recherche d'un utilisateur par son pseudo ou email
-export const checkIfUserExist = async (username: string, email: string) => {
-	const user = await repository.findUser(username, email);
+export const checkIfUserExistByUsernameOrEmail = async (
+	username: string,
+	email: string
+) => {
+	const user = await repository.findUserByUsernameOrEmail(username, email);
 	return user !== null;
 };
 
