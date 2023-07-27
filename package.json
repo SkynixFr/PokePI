@@ -1,15 +1,15 @@
 {
 	"name": "pokepi",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "Pokepi est une API permettant à l'utilisateur de choisir les pokémons dans son propre pokédex",
 	"main": "index.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"migration": "npx sequelize-cli db:migrate",
-		"remove_migration": "npx sequelize-cli db:migrate:undo:all",
-		"seed": "npx sequelize-cli db:seed:all",
 		"dev": "nodemon src/index.ts",
 		"prettier": "prettier --write ."
+	},
+	"prisma": {
+		"seed": "ts-node prisma/seed.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -28,31 +28,22 @@
 	},
 	"homepage": "https://github.com/SkynixFr/PokePI#readme",
 	"dependencies": {
-		"axios": "^1.2.2",
+		"@types/bcrypt": "^5.0.0",
 		"bcrypt": "^5.1.0",
 		"cors": "^2.8.5",
-		"dotenv": "^16.0.3",
+		"dotenv": "^16.3.1",
 		"express": "^4.18.2",
-		"express-rate-limit": "^6.7.0",
-		"helmet": "^6.0.1",
-		"jsonwebtoken": "^9.0.0",
-		"memory-cache": "^0.2.0",
-		"mysql2": "^2.3.3",
-		"nodemon": "^2.0.20",
-		"sequelize": "^6.28.0",
-		"swagger-jsdoc": "^6.2.8",
-		"swagger-ui-express": "^4.6.0"
+		"express-rate-limit": "^6.8.0",
+		"nodemon": "^3.0.1"
 	},
 	"devDependencies": {
-		"@types/bcrypt": "^5.0.0",
+		"@prisma/client": "^5.0.0",
 		"@types/cors": "^2.8.13",
-		"@types/express": "^4.17.15",
-		"@types/jsonwebtoken": "^9.0.0",
-		"@types/memory-cache": "^0.2.2",
-		"@types/node": "^18.11.18",
-		"prettier": "^2.8.1",
-		"sequelize-cli": "^6.6.0",
-		"ts-node-dev": "^2.0.0",
-		"typescript": "^4.9.4"
+		"@types/express": "^4.17.17",
+		"@types/node": "^20.4.5",
+		"prettier": "^3.0.0",
+		"prisma": "^5.0.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.6"
 	}
 }
