@@ -1,0 +1,26 @@
+import * as repository from '../repositories/user.repository';
+
+//  Récupération de tous les utilisateurs
+export const getUsers = async () => {
+	return repository.getUsers();
+};
+
+//  Récupération d'un utilisateur par son pseudo ou email
+export const getUser = async (data: string) => {
+	return repository.getUser(data);
+};
+
+//  Création d'un utilisateur
+export const createUser = async (
+	username: string,
+	email: string,
+	password: string
+) => {
+	return repository.createUser(username, email, password);
+};
+
+//  Recherche d'un utilisateur par son pseudo ou email
+export const checkIfUserExist = async (username: string, email: string) => {
+	const user = await repository.findUser(username, email);
+	return user !== null;
+};

@@ -1,14 +1,8 @@
-import { Router } from 'express';
-import clientsRouter from './clients.routes';
-import PokedexRouter from './pokedex.routes';
-import PokemonRouter from './pokemon.routes';
-import VerifyToken from '../middlewares/authToken';
+import { Router } from "express";
+import ClientsRouter from "./clients.routes"
 
-//Configuration des routes clients et pokemon
-const router = Router();
+const router = Router()
 
-router.use('/client', clientsRouter);
-router.use('/pokemon', VerifyToken, PokemonRouter);
-router.use('/pokedex', VerifyToken, PokedexRouter);
+router.use("/users", ClientsRouter)
 
-export default router;
+export default router
