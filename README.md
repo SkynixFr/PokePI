@@ -9,64 +9,57 @@ Pokepi est une API restful qui permet à un utilisateur de créer son pokédex d
 
 ## Features
 
-- Création, modification et suppression d'un compte client
-- Authentification sécurisée d'un client
-- Création et suppression d'un pokédex
-- Récupération de pokémons grâce à l'API [PokeAPI](https://pokeapi.co)
-- Récupération de tous les pokémons d'un pokédex d'un client
-- Récupération d'un pokémon d'un pokédex d'un client
-- Ajout d'un rate limiter à 20 requêtes toutes les minutes
-- Ajout d'un système de migrations et de fixtures disponibles au lancement du projet
-- Documentation des routes disponibles sur [Swagger](http://localhost:8080/api-docs)
+-  Création, modification et suppression d'un compte utilisateur
+-  Authentification sécurisée d'un utilisateur
+-  Récupération des données d'un utilisateur connecté
+-  Ajout de pokémons dans le pokédex de l'utilisateur connecté
+-  Ajout d'un rate limiter à 20 requêtes toutes les minutes
+-  Ajout d'un système de migrations et de fixtures disponibles au lancement du projet
+-  Système de refresh token
+-  Documentation des routes disponibles sur [Swagger]() (en cours...)
 
 ## Stack
 
-- ![typescript](https://img.shields.io/badge/typescript-4.9.4-blue.svg) 
-- ![express](https://img.shields.io/badge/express-4.18.2-blue.svg)
-- ![mysql](https://img.shields.io/badge/mysql-4.9.4-blue.svg)
-- ![pokeapi](https://img.shields.io/badge/pokeapi-v2-blue.svg)
+-  ![typescript](https://img.shields.io/badge/typescript-5.1.6-blue.svg)
+-  ![express](https://img.shields.io/badge/express-4.18.2-blue.svg)
+-  ![mongodb]
 
 ## Setup
 
-- Télécharger le code source
+-  Télécharger le code source
 
 ```sh
 git clone https://github.com/SkynixFr/PokePI.git
 ```
 
-- Installer les dépendances
-  
+-  Installer les dépendances
+
 ```sh
 npm install
 ```
 
-- Initialisation de la connexion à la base de données : 
+-  Initialisation de la connexion à la base de données :
 
 Un fichier `.exemple.env` recense toutes les variables à compléter dans un fichier `.env`
 
-- Migrations
+-  Migrations
 
-Un système de migration et de seed est disponible. Il permet d'initialiser la base de données et d'y ajouter des données factices.
+Un système de migration et de seed est disponible. Il permet d'initialiser la base de données, de la rendre à jour par rapport aux models et d'y ajouter des données factices.
 
 Pour cela, 2 commandes sont à lancer avant le lancement du serveur :
 
 ```sh
-npm run migration
+npx prisma db pull
 ```
 
 ```sh
-npm run seed
+npm prisma db seed
 ```
 
-Les données factices se trouvent dans le fichier : [demo-client](https://github.com/SkynixFr/PokePI/blob/main/seeders/20230131094058-demo-client.js)
- 
-Une troisième commande est disponible pour réinitialiser la base de données : 
-```sh
-npm run remove_migration
-```
+Les données factices se trouvent dans le fichier : [demo-client](https://github.com/SkynixFr/PokePI/blob/main/prisma/seed.js)
 
-- Lancement du serveur
-  
+-  Lancement du serveur
+
 ```sh
 npm run dev
 ```
@@ -85,4 +78,3 @@ npm run dev
 <img src="https://github.com/Luffysonic.png" width="100" style="border-radius: 50%">
 
 </div>
-

@@ -1,20 +1,27 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
-function VerifyToken(req: Request, res: Response, next: NextFunction) {
-	const token = req.header('x-access-token');
+function authToken(req: Request, res: Response, next: NextFunction) {
+	const authHeader = req.headers['authorization'];
+	const token = authHeader && authHeader.split(' ')[1];
 
 	if (!token) {
 		return res.status(401).send('No token provide');
 	}
 
-	try {
-		const decoded = jwt.verify(token, process.env.SECRET_TOKEN!);
-		req.body.mailClient = (decoded as JwtPayload).mailClient;
-		next();
-	} catch (error) {
-		return res.status(401).send('Unautorized');
+	if (!process.env.ACCESS_TOKEN) {
+		return res
+			.status(401)
+			.send('Missing access token. Please check your environment variables');
 	}
+
+	jwt.verify(token, process.env.ACCESS_TOKEN, (error, user) => {
+		if (error) {
+			return res.status(401).send('Unauthorized ');
+		}
+		req.body.user = user;
+		next();
+	});
 }
 
-export default VerifyToken;
+export default authToken;
