@@ -35,7 +35,8 @@ async function main() {
 		create: {
 			username: 'Newt',
 			email: 'saranyu@gmail.com',
-			password: passwordSaranyu
+			password: passwordSaranyu,
+			pokedex: ['Lucario']
 		}
 	});
 

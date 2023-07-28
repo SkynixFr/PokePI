@@ -64,7 +64,7 @@ export const register = async (req: Request, res: Response) => {
 // Modification d'un utilisateur
 export const updateUser = async (req: Request, res: Response) => {
 	const userId = req.params.id;
-	const data = req.body;
+	const { user, ...data } = req.body;
 
 	if (JSON.stringify(data) === '{}') {
 		return res
@@ -78,6 +78,17 @@ export const updateUser = async (req: Request, res: Response) => {
 
 	if (!userExist) {
 		return res.status(404).send('User not found');
+	}
+
+	if (data.email || data.username) {
+		const userBddExist = await service.checkIfUserExistByUsernameOrEmail(
+			data.username,
+			data.email
+		);
+
+		if (userBddExist) {
+			return res.status(404).send('User already exist');
+		}
 	}
 
 	if (data.password) {
@@ -231,7 +242,20 @@ export const addPokemons = async (req: Request, res: Response) => {
 		return res.status(404).send('User not found');
 	}
 
-	const uniquePokemons = [...new Set([...existingUser.pokedex, ...pokemons])];
+	const lowerCaseNewPokemons = pokemons.map((pokemon: string) =>
+		pokemon.toLowerCase()
+	);
+
+	const lowerCasePokemonsExistingPokemons = existingUser.pokedex.map(
+		(pokemon: string) => pokemon.toLowerCase()
+	);
+
+	const uniquePokemons = [
+		...new Set([
+			...lowerCasePokemonsExistingPokemons,
+			...lowerCaseNewPokemons
+		])
+	];
 
 	try {
 		const updatedUser = await service.addPokemons(user.id, uniquePokemons);
