@@ -167,7 +167,12 @@ export const login = async (req: Request, res: Response) => {
 
 //	Récupération des données de l'utilisateur connecté
 export const getUserConnected = async (req: Request, res: Response) => {
-	return res.status(200).send(req.body.user);
+	const user = await service.getUser(req.body.user.username);
+
+	if (!user) {
+		return res.status(404).send('User not found');
+	}
+	return res.status(200).send(user);
 };
 
 //	Refresh token
